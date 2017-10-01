@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>proj.ctworld</groupId>
+	<artifactId>ctss</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<name>CTWORLD_CTSS</name>
+	<description>CTSS project</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.4.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		
+		<!-- 以下是我對版本的調整 -->
+		<hibernate.version>5.1.8.Final</hibernate.version>
+		<mariadb-connector.version>1.1.10</mariadb-connector.version>
+		<thymeleaf.version>3.0.6.RELEASE</thymeleaf.version>
+		<thymeleaf-layout-dialect.version>2.2.1</thymeleaf-layout-dialect.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<!-- for wildfly install -->
+			<!-- 這個項目我有一些調整 -->
+			<exclusions>
+	            <exclusion>
+	                <groupId>org.apache.tomcat.embed</groupId>
+	                <artifactId>tomcat-embed-websocket</artifactId>
+	            </exclusion>
+	        </exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- 從這裹開始是新加入的功能項目哦 -->
+		<dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-devtools</artifactId>
+	    </dependency>
+	    
+        <dependency>
+			<groupId>org.mariadb.jdbc</groupId>
+			<artifactId>mariadb-java-client</artifactId>
+			<version>1.5.7</version>
+		</dependency>
+		<!-- 重複 -->
+<!--         <dependency> -->
+<!--             <groupId>org.springframework.boot</groupId> -->
+<!--             <artifactId>spring-boot-starter-test</artifactId> -->
+<!--             <scope>test</scope> -->
+<!--         </dependency> -->
+
+		<dependency>
+		  <groupId>com.fasterxml.jackson.jaxrs</groupId>
+		  <artifactId>jackson-jaxrs-json-provider</artifactId>
+		  <version>2.2.1</version>
+		</dependency>
+		
+		<dependency>
+		  <groupId>com.fasterxml.jackson.datatype</groupId>
+		  <artifactId>jackson-datatype-joda</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+		</dependency>
+		<!-- https://stackoverflow.com/questions/42224326/nosuchmethoderror-when-starting-spring-boot-application-with-hibernate-jpa -->
+		<dependency>
+			<groupId>org.jadira.usertype</groupId>
+			<artifactId>usertype.core</artifactId>
+			<version>5.0.0.GA</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.thymeleaf.extras</groupId>
+		    <artifactId>thymeleaf-extras-java8time</artifactId>
+		    <version>2.1.0.RELEASE</version>
+		</dependency>
+		
+		<!-- JoyceLai 2017/07/31 Add -->
+		<!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
+		<dependency>
+		    <groupId>commons-logging</groupId>
+		    <artifactId>commons-logging</artifactId>
+		    <version>1.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+		<dependency>
+		    <groupId>commons-codec</groupId>
+		    <artifactId>commons-codec</artifactId>
+		    <version>1.10</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-collections4</artifactId>
+		    <version>4.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.directory.studio/org.apache.commons.lang -->
+		<dependency>
+		    <groupId>org.apache.directory.studio</groupId>
+		    <artifactId>org.apache.commons.lang</artifactId>
+		    <version>2.6</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi</artifactId>
+		    <version>3.16</version>
+		</dependency>
+		
+		<!-- EnnisHong 2017/08/2 Add -->
+		<dependency>
+		    <groupId>org.springframework.session</groupId>
+		    <artifactId>spring-session</artifactId>
+		</dependency>
+		
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+
+</project>

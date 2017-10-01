@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en-us" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta content="text/html;charset=UTF-8">
+		<title>中台禪寺消防安檢登錄系統- 總表 </title>
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<!-- Basic Styles -->
+		<link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome.min.css">
+
+		<!-- SmartAdmin Styles : Caution! DO NOT change the order -->
+		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production-plugins.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-skins.min.css">
+
+		<!-- SmartAdmin RTL Support -->
+		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.min.css"> 
+
+		<!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
+		<link rel="stylesheet" type="text/css" media="screen" href="css/demo.min.css">
+
+		<!-- FAVICONS -->
+		<link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
+
+		<!-- GOOGLE FONT -->
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+
+		<!-- Specifying a Webpage Icon for Web Clip 
+			 Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
+		<link rel="apple-touch-icon" href="img/splash/sptouch-icon-iphone.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="img/splash/touch-icon-ipad.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="img/splash/touch-icon-iphone-retina.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="img/splash/touch-icon-ipad-retina.png">
+		
+		<!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		
+		<!-- Startup image for web apps -->
+		<link rel="apple-touch-startup-image" href="img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+		<link rel="apple-touch-startup-image" href="img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+		<link rel="apple-touch-startup-image" href="img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+	
+        <!-- import jQWidgets js -->	
+        <link type="text/css" rel="Stylesheet" th:href="@{js/jqwidgets/styles/jqx.base.css}" />
+        <link type="text/css" rel="Stylesheet" th:href="@{js/jqwidgets/styles/jqx.energyblue.css}" />
+        <link type="text/css" rel="Stylesheet" th:href="@{js/jqwidgets/styles/jqx.orange.css}" />
+        <link type="text/css" rel="Stylesheet" th:href="@{css/ctssBlue.css}" />
+        <link type="text/css" rel="Stylesheet" th:href="@{js/jquery/base/jquery.ui.accordion.css}" />
+        <script type="text/javascript" th:src="@{js/libs/jquery-2.1.1.min.js}"></script>
+        <script type="text/javascript" th:src="@{js/libs/jquery-ui-1.10.3.min.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxcore.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxdata.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxbuttons.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxscrollbar.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxlistbox.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxdropdownlist.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxmenu.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxcombobox.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxinput.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxTextArea.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxtoolbar.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxgrid.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxgrid.sort.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxgrid.pager.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxgrid.selection.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxgrid.edit.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxgrid.filter.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxgrid.columnsresize.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxdatetimeinput.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxcalendar.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxtooltip.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/globalization/globalize.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxwindow.js}"></script>  
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxdata.export.js}"></script>  
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxgrid.export.js}"></script>    
+        <script type="text/javascript" th:src="@{js/jquery/jquery.ui.core.js}"></script>    
+        <script type="text/javascript" th:src="@{js/jquery/jquery.ui.widget.js}"></script>    
+        <script type="text/javascript" th:src="@{js/jquery/jquery.ui.accordion.js}"></script>  
+        
+	    <style type="text/css">
+	        .editedRow {
+	          color: #b90f0f !important;
+	          font-style: italic;
+	        }
+	        div.inline {
+	        	display: inline;
+	        }
+	        html, body, #main{
+	        	min-height: 100% !important;
+	        	height: 	100%;
+	        	overflow:	hidden;
+	        }
+	        .box {
+			    position: relative;
+			    float: left;
+			}
+			.box img {
+			    position: absolute;
+			    top: 0;
+			    left: 0;
+			    right: 0;
+			    bottom: 0;
+			    margin: auto;
+			}
+			#userPlace {
+				width: 100%;
+			}
+			html {
+				font-size: 100%;
+			}
+			h5 {
+				font-size: 1.5rem;
+				position:absolute;
+			}
+            aside {
+                background: #dfe2ed;
+            }
+			aside nav {
+				font-size:1rem;
+			}
+			aside nav span {
+				font-size:1rem;
+			}
+            .jqx-widget, .jqx-widget-header, .jqx-widget-content, input[type=text].jqx-input, div, span, label, td {
+                font-size: 16px;
+            }
+            .jqx-toolbar {
+                background-color: #FFFFFF !important;
+            }
+        </style>
+	    
+	    <script type="text/javascript">
+	        var placeType ;
+	        var typeTool ;
+	        var placeId ;
+	        var year ;
+	        var yearTool ;
+	        var month ;
+	        var summarySource ;
+	        var recordSource ;
+	        var exportSource ;
+	        var editType ;
+	        var gridHeight ;
+	        var statusItem = ['已送單','處理中','已完成'];
+	        var symbolItem = ['O','V','X'];
+	        
+		    $(document).ready(function () {
+                
+		    	initGrid();
+		    	
+		    	initEditWindow();
+		    	
+		    	initExportWindow();
+		        
+		        $("#popWindow").jqxWindow({ height: 150, width: 300, theme: 'energyblue', isModal: true, autoOpen: false });
+                
+	            $("#jqxToolBar").jqxToolBar({
+	                width: '100%', height: 60, theme: 'energyblue', tools: 'custom dropdownlist custom dropdownlist custom dropdownlist toggleButton | toggleButton',
+	                initTools: function (type, index, tool, menuToolIninitialization) {
+	                    switch (index) {
+	                    case 0:
+	                        tool.text("類別");
+	                        break;
+	                    case 1:
+	                    	tool.jqxDropDownList({ width: 100, height: 30, theme: 'energyblue', source: queryPlaceTypeList(), placeHolder: '' });
+	                    	tool.bind('change', function (event) {
+	                    		if(event.args){
+	                    			placeType = event.args.item.value;
+	                    		}
+	                    		var source = queryCheckYearList() ;
+	                    		var now = new Date();
+	                    		var nowSting = now.getFullYear().toString();
+	                    		var nowYearIndex = $.inArray( nowSting , source );
+	                    		yearTool.jqxDropDownList({source: source, selectedIndex: nowYearIndex});
+	                    		year = source[nowYearIndex] ;
+	                    	});
+	                    	typeTool = tool ;
+                            break;
+	                    case 2:
+	                        tool.text("年");
+	                        break;
+	                    case 3:
+	                    	tool.jqxDropDownList({ width: 70, height: 30, theme: 'energyblue', source: [], selectedIndex: 0, placeHolder: '' });
+	                    	tool.bind('change', function (event) {
+	                    		if(event.args){
+	                    			year = event.args.item.value;
+	                    		}
+	                    	});
+	                    	
+	                    	if (menuToolIninitialization === false) {
+	                    		yearTool = tool ;
+                            }
+	                    	
+                            break;
+	                    case 4:
+	                        tool.text("月");
+	                        break;
+	                    case 5:
+	                    	tool.jqxDropDownList({ width: 50, height: 30, theme: 'energyblue', source: ["01","02","03","04","05","06","07","08","09","10","11","12"] , selectedIndex: 0 });
+	                    	month = tool.jqxDropDownList('getSelectedItem').value;
+	                    	tool.bind('change', function (event) {
+	                    		if(event.args){
+	                    			month = event.args.item.value;
+	                    		}
+	                    	});
+                            break;
+	                    case 6:
+	                        tool.jqxButton({ width: 150, height: 30, theme: 'ctssBlue'});
+	                        tool.text("修改/調閱/新增");
+	                        tool.on("click", function () {
+	                            if(!placeType) {
+	                                popupWin("提醒", "請選擇類別！");
+	                            } else if( !year ){
+	                            	popupWin("提醒", "請選擇年度! ");
+	                            } else if( !month ){
+	                            	popupWin("提醒", "請選擇月份! ");
+	                            } else {
+	                                $('#summarygrid').jqxGrid('clearselection');
+	                            	$('#summarygrid').jqxGrid('showloadelement');
+	                            	setTimeout( function (){
+	                            		setSummaryGrid();
+		                            	$("#accordion").hide();
+		                                $("#summarygrid").jqxGrid({ height: gridHeight });
+	                            	} , 100 );
+	                            }
+	                        });
+	                        break;
+		                case 7:
+		                    tool.jqxButton({ width: 85, height: 30, theme: 'ctssBlue' }); 
+	                        tool.text("匯出/列印");
+	                        tool.on("click", function () {
+	                        	var exportTitle = '中台禪寺' + ( year - 1911 ) + "年" + month + "月" ;
+	                        	var exportDate = '列印日期:' ;
+	                        	var date = new Date();
+	                        	exportDate += date.getFullYear() + '/' + ( date.getMonth() + 1 ) + '/' + date.getDate() + " " + 
+	                        	( date.getHours() > 12 ? "PM" : "AM" ) + " " + date.getHours() + ":" + date.getMinutes() ;
+	                        	
+	                        	if( placeType == '精舍單位' ){
+	                        		exportTitle += '精舍消防自行檢查總表' ;
+	                        	} else {
+	                        		exportTitle += '消防自行檢查總表-' + placeType ;
+	                        	}
+	                        	
+	                        	$('#exportTitle').empty();
+	                        	$('#exportDate').empty();
+	                        	$('#exportTitle').append("<span>" + exportTitle + "<span>");
+	                            $('#exportDate').append("<span>" + exportDate + "<span>");
+	                            setExportGrid();
+	                            //setExportGridColumn();
+	                            $("#exportWindow").jqxWindow('open');
+	                            //exportExcel();
+	                        });
+	                        break;  
+	                    }
+	                }
+	            });
+	            
+	            $("#btnConfirm").jqxButton({ theme: 'ctssBlue' });
+	            
+	            $("#btnConfirm").click(function () {
+                    $("#popWindow").jqxWindow('close');
+                });
+	            
+	            $('body').on('click','img',function(){
+
+	            	var row = $(this).attr("alt");
+	            	$("#row").val(row);
+	            	var data ;
+	            	
+	            	
+	            	if( this.id == "summaryEditImg" ) {
+	            		
+	            		data = $("#summarygrid").jqxGrid('getrowdata', row);
+	                    $("#fcsId").val(data.fcsId);
+	                    $("#editTitle").text("場所");
+	                    $("#titleContent").val(data.place);
+	                    $("#ctNote").val(data.ctNote);
+	                    
+	                    editType = 'checkSummary' ;
+	                    
+	            	} else {
+	            		
+	            		data = $("#recordgrid").jqxGrid('getrowdata', row);
+	                    $("#fcrId").val(data.fcrId);
+	                    $("#editTitle").text("設備內容");
+	                    $("#titleContent").val(data.deviceType);
+	                    $("#ctNote").val(data.ctNote);
+	                    
+	                    editType = 'checkRecord' ;
+	            	}
+	            	
+                    $("#editWindow").jqxWindow('open');
+                    
+                });
+	            
+	            $('#minifyMenu').click(function (){
+	            	window.setTimeout(function(){
+						 var gridConfig = { "width" : $("#jqxWidget").width() };
+						 $("#summarygrid").jqxGrid(gridConfig);
+						 $("#recordgrid").jqxGrid(gridConfig);
+					 },0);
+	            });
+
+	            
+	            $("#userPlace").change(function () {
+	                $("#userPlaceId").val($("#userPlace option:selected").val());
+	            });
+	            
+	            
+                 $("#accordionIcon").click(function() {
+                     var active = $("#accordion").accordion('option', 'active'); 
+                     if(active === 0) {
+                         $("#summarygrid").jqxGrid({ height: $("#jqxWidget").height() * 0.87 });
+                     } else {
+                         $("#summarygrid").jqxGrid({ height: $("#jqxWidget").height() * 0.9 * 0.44 });
+                     }
+                 });
+	                  
+	        });    // End Of $(document).ready(function ()
+	        		
+			function setSummaryGrid(){
+				
+	        	var data ={
+                       "placeType": placeType,
+                       "year" : year ,
+                       "month" : month
+                };
+	        	
+				$.ajax({
+				     url: '../api/admin/checkSummary/queryCheckSummaryList',
+				     data: data,
+				     type: 'post',
+				     dataType: 'json',
+				     async: false,
+				     success: function(data) {
+				  	   if( data.msg.length > 0 ){
+				  		   popupWin("執行結果", data.msg);
+				  	   }else{
+				  		 $("#summarygrid").jqxGrid('clear');
+				  		   if( data.checkSummaryList.length != 0 ){
+				  			 summarySource.localdata = data.checkSummaryList ;
+				  			 $("#summarygrid").jqxGrid('updatebounddata', 'cells'); 
+				  		   }
+				  	   }
+					},
+					complete: function(data) {
+						$('#summarygrid').jqxGrid('hideloadelement');
+					}
+				});
+	        }
+	        
+			function setRecordGrid(placeId){
+				var hasData = false;
+				var data ={
+                       "placeId": placeId,
+                       "year" : year ,
+                       "month" : month
+                };
+              	
+				$.ajax({
+				     url: '../api/admin/checkSummary/queryCheckRecordList',
+				     data: data,
+				     type: 'post',
+				     dataType: 'json',
+				     async: false,
+				     beforeSend:function(){
+				    	 $('#recordgrid').jqxGrid('showloadelement');
+	                 },
+				     success: function(data) {
+				  	   if( data.msg.length > 0 ){
+				  		   popupWin("執行結果", data.msg);
+				  	   }else{
+				  		 $("#recordgrid").jqxGrid('clear');
+				  		   if( data.checkRecordList.length != 0 ){
+				  			 recordSource.localdata = data.checkRecordList ;
+				  			 $("#recordgrid").jqxGrid('updatebounddata', 'cells'); 
+				  			hasData = true;
+				  		   }
+				  	   }
+					},
+					complete: function(data) {
+						$('#recordgrid').jqxGrid('hideloadelement');
+					}
+				});
+				
+				return hasData;
+	        }
+			
+			function setExportGrid(){
+				
+	        	var data ={
+                       "placeType": placeType,
+                       "year" : year ,
+                       "month" : month
+                };
+	        	
+				$.ajax({
+				     url: '../api/admin/checkSummary/queryExportSummaryList',
+				     data: data,
+				     type: 'post',
+				     dataType: 'json',
+				     async: false,
+				     beforeSend:function(){
+				    	 $('#exportgrid').jqxGrid('showloadelement');
+	                 },
+				     success: function(data) {
+				  	   if( data.msg.length > 0 ){
+				  		   popupWin("執行結果", data.msg);
+				  	   }else{
+				  		 $("#exportgrid").jqxGrid('clear');
+				  		   if( data.exportSummaryList.length != 0 ){
+				  			 exportSource.localdata = data.exportSummaryList ;
+				  			 //$("#exportgrid").jqxGrid('updatebounddata', 'cells');
+				  			 if( placeType == '精舍單位' ){
+				  				 setExportGrid1();
+				  			 } else {
+				  				 setExportGrid2();
+				  			 }
+				  		   }
+				  	   }
+					},
+					complete: function(data) {
+						$('#exportgrid').jqxGrid('hideloadelement');
+					}
+				});
+	        }
+			
+			function setExportGridColumn(){
+				var columns = [] ;
+				if( placeType == '精舍單位' ){
+					columns = [ 'unitCode' , 'place' , 'fireRefuge' , 'fireProtection' , 'eletricDevice' , 'fireSource' , 'ctNote' , 'manager' , 'examiner1' , 'examiner2' ] ;
+				} else {
+					columns = [ 'manager' , 'examiner1' , 'examiner2' , 'unitCode' , 'place' , 'fireRefuge' , 'fireProtection' , 'eletricDevice' , 'fireSource' , 'ctNote' ] ;
+				} 
+				
+				columns.forEach(function ( value , index ){
+					$('#exportgrid').jqxGrid('setcolumnindex', value, index);
+				});
+				
+				if( placeType != '精舍單位' ){
+					$('#exportgrid').jqxGrid('hidecolumn', 'unitCode');
+				}
+			}
+	        
+		    function queryPlaceTypeList(){
+		    	
+		    	var resultData = [] ;
+                
+		    	$.ajax({
+                    url: '../api/admin/checkSummary/queryPlaceTypeList',
+                    type: 'post',
+                    dataType: 'json',
+                    async: false,
+                    success: function(data) {
+                    	if( data.msg.length > 0 ){
+                    		popupWin("執行結果",data.msg);
+                    	} else {
+                    		resultData = data.resultList;
+                    	}
+                    }
+                 });
+                
+                return resultData ; 
+	        }
+		    
+		    function queryCheckYearList(){
+		    	
+		    	var resultData = [] ;
+		    	
+                $.ajax({
+                    url: '../api/admin/checkSummary/queryCheckYearList',
+                    data: {
+                        "placeType": placeType
+                    },
+                    type: 'post',
+                    dataType: 'json',
+                    async: false,
+                    success: function(data) {
+                    	if( data.msg.length > 0 ){
+                    		popupWin("執行結果",data.msg);
+                    	} else {
+                    		resultData = data.resultList;
+                    	}
+                    }
+                 });
+                
+                return resultData ; 
+		    }
+		    
+		    function exportExcel(){
+		    	 var data = {
+	                 "placeType" : placeType,
+	                 "year" : year,
+	                 "month" : month 
+                 };
+                
+                 window.location = "../admin/checkSummary/exportExcel?placeType=" + placeType + "&year=" + year + "&month=" + month ;
+
+                 $.ajax({
+                     url: '../admin/checkSummary/exportExcel',
+                     data: data,
+	                    type: 'get',
+	                    dataType: 'json',
+	                    contentType: 'application/json;charset=UTF-8',
+	                    success: function(data) {
+
+	                    }
+	             });
+		    }
+	        		
+            function parseDateToString(dateString) {
+                var dateArray = dateString.split(',');
+                var year = dateArray[0];
+                var month = dateArray[1].length < 2 ? '0' + dateArray[1] : dateArray[1];
+                var day = dateArray[2].length < 2 ? '0' + dateArray[2] : dateArray[2];
+                var hour = dateArray[3].length < 2 ? '0' + dateArray[3] : dateArray[3];
+                var min = dateArray[4].length < 2 ? '0' + dateArray[4] : dateArray[4];
+                var sec = dateArray[5].length < 2 ? '0' + dateArray[5] : dateArray[5];
+                var resultDateStr = year + '-' + month + '-' + day + ' ' + hour + ':' + min + ':' + sec;
+                return resultDateStr;
+            }
+            
+            function popupWin(header, content) {
+                $("#msgHeader").empty().append("<span>" + header + "</span>");
+                $("#msg").empty().append("<span>" + content + "</span>");
+                $("#popWindow").jqxWindow('open');
+            }
+            
+            function initGrid(){
+            	
+            	initSummaryGrid();
+            	
+            	initRecordGrid();
+            	
+            	$("#accordion").hide();
+            }
+            
+			function initSummaryGrid() {
+	        	
+	        	summarySource =
+            	{
+                    dataType: "json",
+                    localdata: [],
+                    datafields:
+                    [
+                    	{ name: 'fcsId' , type: 'int' },
+                        { name: 'place', type: 'string' },
+                        { name: 'placeId', type: 'string' },
+                        { name: 'year', type: 'string' },
+                        { name: 'month', type: 'string' },
+                        { name: 'fireRefuge', type: 'string' },
+                        { name: 'fireProtection', type: 'string' },
+                        { name: 'electricDevice', type: 'string'},
+                        { name: 'fireSource', type: 'string' },
+                        { name: 'ctNote', type: 'string' },
+                        { name: 'manager', type: 'string' },
+                        { name: 'examiner1', type: 'string' },
+                        { name: 'examiner2', type: 'string' }
+                    ],
+                    id: 'fcsId'
+                };
+                
+                var dataAdapter = new $.jqx.dataAdapter(summarySource);
+                
+                gridHeight = $("#jqxWidget").height() * 0.9;
+                
+                $("#summarygrid").jqxGrid({
+                	 width:	'100%',
+                	 columnsmenuwidth:	'100%',
+                     height: gridHeight,
+                     source: dataAdapter,
+                     showfilterrow: true,
+                     filterable: true,
+                     columnsresize: true,
+                     theme: 'energyblue',
+                     columns: [
+                         { text: 'No.', sortable: false, filterable: false, editable: false,
+                             groupable: false, draggable: false, resizable: false,
+                             datafield: '', columntype: 'number', width: '3%', minwidth: 50,
+                             cellsrenderer: function (row, column, value) {
+                                 return "<div style='margin:4px;'>" + (value + 1) + "</div>";
+                             }
+                         },
+                         { text: '編輯', width: '3%', filterable: false, columntype: 'textbox', minwidth: 50,
+                         	cellsrenderer: function (row, column, value) {
+                         		return "<div style='height: 100%; width: 100%;' class='box'><img src='img/pencil.png' id='summaryEditImg' alt='" + row + "' width='50%'/></div>" ;
+                         	}
+                         },
+                         { text: '場所', columntype: 'textbox', editable: false, minwidth: 140, filtertype: 'input', datafield: 'place', width: '9%' },
+                         { text: '年', columntype: 'textbox', editable: false, minwidth: 70, filtertype: 'input', datafield: 'year', width: '5%' },
+                         { text: '月', columntype: 'textbox', editable: false, minwidth: 50, filtertype: 'input', datafield: 'month', width: '3%', cellsalign: 'center' },
+                         { text: '防火避難設施', columntype: 'textbox', editable: false, minwidth: 120, filtertype: 'input', datafield: 'fireRefuge', width: '15%' },
+                         { text: '消防安全設備', columntype: 'textbox', editable: false, minwidth: 120, filtertype: 'input', datafield: 'fireProtection', width: '15%' },
+                         { text: '電器安全', columntype: 'textbox', editable: false, minwidth: 120, filtertype: 'input', datafield: 'electricDevice', width: '15%' },
+                         { text: '日常火源', columntype: 'textbox', editable: false, minwidth: 120, filtertype: 'input', datafield: 'fireSource', width: '15%' },
+                         { text: '本山備註', columntype: 'textbox', editable: false, minwidth: 80, filtertype: 'input', datafield: 'ctNote', width: '15%' },
+                         { text: '負責人', columntype: 'textbox', editable: false, minwidth: 70, filtertype: 'input', datafield: 'manager', width: '6%' },
+                         { text: '檢查者1', columntype: 'textbox', editable: false, minwidth: 70, filtertype: 'input', datafield: 'examiner1', width: '6%' },
+                         { text: '檢查者2', columntype: 'textbox', editable: false, minwidth: 70, filtertype: 'input', datafield: 'examiner2', width: '6%' }
+                     ]
+                 });
+                
+                $('#summarygrid').on('rowselect', function (event) 
+           		{
+           		    var args = event.args;
+           		    var rowData = args.row;
+           		    placeId = rowData.placeId;
+           		 	var hasRecordData = setRecordGrid( placeId );
+           		 	if(hasRecordData) {
+                        $("#accordion").show();
+                        var icons = {
+                            header: "fa fa-plus-square-o",
+                            activeHeader: "fa fa-minus-square-o"
+                        };
+           		        $("#accordion").accordion({collapsible: true, active: 0, icons: icons});
+                        $("#summarygrid").jqxGrid({ height: gridHeight * 0.44 });
+           		 	} else {
+                        $("#accordion").hide();
+                        $("#summarygrid").jqxGrid({ height: gridHeight });
+           		 	}
+           		});
+                
+            }
+			
+            function initRecordGrid() {
+            	
+            	recordSource =
+                {
+                    dataType: "json",
+                    localdata: [],
+                    datafields:
+                    [
+                    	{ name: 'fcrId' , type: 'int' },
+                        { name: 'checkId', type: 'string' },
+                        { name: 'checkType', type: 'string' },
+                        { name: 'deviceType', type: 'string' },
+                        { name: 'checkContent', type: 'string' },
+                        { name: 'checkSymbol', type: 'string' },
+                        { name: 'checkResult', type: 'string'},
+                        { name: 'checkStatus', type: 'string' },
+                        { name: 'ctNote', type: 'string' },
+                        { name: 'manager', type: 'string' },
+                        { name: 'examiner1', type: 'string' },
+                        { name: 'examiner2', type: 'string' }
+                    ],
+                    id: 'fcrId'
+                };
+            	
+                var dataAdapter = new $.jqx.dataAdapter(recordSource);
+                
+                $("#recordgrid").jqxGrid({
+                	 width:	'100%',
+                	 columnsmenuwidth:	'100%',
+                	 height: gridHeight * 0.5 ,
+                     source: dataAdapter,
+                     showfilterrow: true,
+                     filterable: true,
+                     columnsresize: true,
+                     theme: 'energyblue',
+                     columns: [
+                         {
+                             text: 'No.', sortable: false, filterable: false, editable: false,
+                             groupable: false, draggable: false, resizable: false,
+                             datafield: '', columntype: 'number', width: '3%', minwidth: 50,
+                             cellsrenderer: function (row, column, value) {
+                                 return "<div style='margin:4px;'>" + (value + 1) + "</div>";
+                             }
+                         },
+                         { text: '編輯', width: '3%', filterable: false, columntype: 'textbox', minwidth: 50,
+                         	cellsrenderer: function (row, column, value) {
+                         		return "<div style='height: 100%; width: 100%;' class='box'><img src='img/pencil.png' id='recordEditImg' alt='" + row + "' width='50%'/></div>" ;
+                         	}
+                         },
+                         { text: '檢查項辨識碼', columntype: 'textbox', editable: false, minwidth: 120, filtertype: 'input', datafield: 'checkId', width: '9%' },
+                         { text: '記錄別', columntype: 'textbox', editable: false, minwidth: 120, filtertype: 'input', datafield: 'checkType', width: '9%' },
+                         { text: '類別設備內容', columntype: 'textbox', editable: false, minwidth: 120, filtertype: 'input', datafield: 'deviceType', width: '9%' },
+                         { text: '檢查重點實施內容', columntype: 'textbox', editable: false, minwidth: 200, filtertype: 'input', datafield: 'checkContent', width: '15%' },
+                         { text: '檢查狀況處置情形', columntype: 'textbox', editable: false, minwidth: 200, filtertype: 'input', datafield: 'checkResult', width: '15%'},
+                         { text: '狀態', columntype: 'textbox', editable: false, minwidth: 90, filtertype: 'list', filteritems: statusItem, datafield: 'checkStatus', width: '6%' },
+                         { text: '本山備註', columntype: 'textbox', editable: false, minwidth: 200, filtertype: 'input', datafield: 'ctNote', width: '15%' },
+                         { text: '負責人', columntype: 'textbox', editable: false, minwidth: 90, filtertype: 'input', datafield: 'manager', width: '6%' },
+                         { text: '檢查者1', columntype: 'textbox', editable: false, minwidth: 90, filtertype: 'input', datafield: 'examiner1', width: '6%' },
+                         { text: '檢查者2', columntype: 'textbox', editable: false, minwidth: 90, filtertype: 'input', datafield: 'examiner2', width: '6%' }
+                     ]
+                 });
+                
+                var  localizationobj = {};
+                localizationobj.filterchoosestring= "全部";
+                $("#recordgrid").jqxGrid('localizestrings', localizationobj);
+            }
+            
+            function initEditWindow() {
+            	
+            	$("#editWindow").jqxWindow({ height: 200, width: 400, theme: 'energyblue', isModal: true, autoOpen: false });
+            	$("#okBtn").jqxButton({ theme: 'ctssBlue' });
+            	$("#cancelBtn").jqxButton({ theme: 'orange' });
+            	
+            	$("#okBtn").click(function () {
+            		
+            		var actionUrl ;
+            		var row = $("#row").val() ;
+            		var ctNote = $("#ctNote").val() ;
+            		
+            		if( editType == 'checkSummary' ){
+            			actionUrl = "../api/admin/checkSummary/updateCheckSummaryCtNote" ;
+            		} else {
+            			actionUrl = "../api/admin/checkSummary/updateCheckRecordCtNote" ;
+            		}
+            		
+            		var data = {
+            			"fcrId" : $("#fcrId").val() ,
+            			"fcsId" : $("#fcsId").val() ,
+            			"ctNote" : ctNote
+            		};
+            		
+            		$.ajax({
+					     url: actionUrl ,
+					     data: data,
+					     type: 'post',
+					     dataType: 'json',
+					     async: false,
+					     success: function(data) {
+					       popupWin("執行結果", data.msg);
+					       console.log(" success : " + data.success );
+					       if( data.success ){
+					    	   console.log(" row : " + row + " ctNote : " + ctNote );
+					    	   if(  editType == 'checkSummary' ){
+					    		   $("#summarygrid").jqxGrid('setcellvalue', row, "ctNote", ctNote ); 
+					    	   } else {
+					    		   $("#recordgrid").jqxGrid('setcellvalue', row, "ctNote", ctNote );
+					    	   }
+					       }
+					  	   $("#editWindow").jqxWindow('close');
+						}
+					});
+                });
+            	
+            	$("#cancelBtn").click(function () {
+                    $("#editWindow").jqxWindow('close');
+                });
+            	
+            }
+            
+            function initExportWindow(){
+                
+                $("#exportWindow").jqxWindow({ height: '100%', width: '100%', minWidth: 800, maxWidth:1024, theme: 'energyblue', isModal: true, autoOpen: false, resizable: true, showCloseButton: true });
+                
+				$("#exportWinBtn").jqxButton({ width: 80, height: 30 , theme: 'ctssBlue' });
+	            
+	            $("#exportWinBtn").on('click', function (){
+	            	exportExcel();
+	            	$("#exportWindow").jqxWindow("close");
+	            });
+                
+	            initExportSource();
+            }
+            
+            function initExportSource(){
+            	exportSource =
+            	{
+                    dataType: "json",
+                    localdata: [],
+                    datafields:
+                    [
+                    	{ name: 'fcsId' , type: 'int' },
+                        { name: 'place', type: 'string' },
+                        { name: 'placeId', type: 'string' },
+                        { name: 'checkYear', type: 'string' },
+                        { name: 'ckechMonth', type: 'string' },
+                        { name: 'fireRefuge', type: 'string' },
+                        { name: 'fireProtection', type: 'string' },
+                        { name: 'electricDevice', type: 'string'},
+                        { name: 'fireSource', type: 'string' },
+                        { name: 'ctNote', type: 'string' },
+                        { name: 'manager', type: 'string' },
+                        { name: 'examiner1', type: 'string' },
+                        { name: 'examiner2', type: 'string' },
+                        { name: 'unitCode', type: 'string' }
+                    ]
+                };
+            }
+            
+            function setExportGrid1(){
+            	var dataAdapter = new $.jqx.dataAdapter(exportSource);
+            	
+            	$("#exportgrid").jqxGrid({
+               	 	width:	'100%' ,
+               	 	columnsmenuwidth:	'100%',
+                    source: dataAdapter,
+                    autoheight: true,
+                    autorowheight: true,
+                    columnsresize: true,
+                    theme: 'energyblue',
+                    columns: [
+                        { text: '精舍代碼', columntype: 'textbox', editable: false, minwidth: 70, filtertype: 'input', datafield: 'unitCode', width: '3%' },
+                        { text: '場所', columntype: 'textbox', editable: false, minwidth: 140, filtertype: 'input', datafield: 'place', width: '9%' },
+                        { text: '防火避難設施', columntype: 'textbox', editable: false, minwidth: 120, filtertype: 'input', datafield: 'fireRefuge', width: '14%' },
+                        { text: '消防安全設備', columntype: 'textbox', editable: false, minwidth: 120, filtertype: 'input', datafield: 'fireProtection', width: '14%' },
+                        { text: '電器安全', columntype: 'textbox', editable: false, minwidth: 120, filtertype: 'input', datafield: 'electricDevice', width: '14%' },
+                        { text: '日常火源', columntype: 'textbox', editable: false, minwidth: 120, filtertype: 'input', datafield: 'fireSource', width: '14%' },
+                        { text: '本山備註', columntype: 'textbox', editable: false, minwidth: 80, filtertype: 'input', datafield: 'ctNote', width: '14%' },
+                        { text: '負責人', columntype: 'textbox', editable: false, minwidth: 70, filtertype: 'input', datafield: 'manager', width: '6%' },
+                        { text: '檢查者1', columntype: 'textbox', editable: false, minwidth: 70, filtertype: 'input', datafield: 'examiner1', width: '6%' },
+                        { text: '檢查者2', columntype: 'textbox', editable: false, minwidth: 70, filtertype: 'input', datafield: 'examiner2', width: '6%' }
+                    ]
+                });
+            }
+            
+            function setExportGrid2(){
+            	var dataAdapter = new $.jqx.dataAdapter(exportSource);
+            	
+            	$("#exportgrid").jqxGrid({
+               	 	width:	'100%' ,
+               	 	columnsmenuwidth:	'100%',
+                    source: dataAdapter,
+                    autoheight: true,
+                    autorowheight: true,
+                    columnsresize: true,
+                    theme: 'energyblue',
+                    columns: [
+                    	{ text: '負責人', columntype: 'textbox', editable: false, minwidth: 70, filtertype: 'input', datafield: 'manager', width: '7%' },
+                        { text: '檢查者1', columntype: 'textbox', editable: false, minwidth: 70, filtertype: 'input', datafield: 'examiner1', width: '7%' },
+                        { text: '檢查者2', columntype: 'textbox', editable: false, minwidth: 70, filtertype: 'input', datafield: 'examiner2', width: '7%' },                        
+                        { text: '場所', columntype: 'textbox', editable: false, minwidth: 140, filtertype: 'input', datafield: 'place', width: '9%' },
+                        { text: '防火避難設施', columntype: 'textbox', editable: false, minwidth: 120, filtertype: 'input', datafield: 'fireRefuge' },
+                        { text: '消防安全設備', columntype: 'textbox', editable: false, minwidth: 120, filtertype: 'input', datafield: 'fireProtection' },
+                        { text: '電器安全', columntype: 'textbox', editable: false, minwidth: 120, filtertype: 'input', datafield: 'electricDevice' },
+                        { text: '日常火源', columntype: 'textbox', editable: false, minwidth: 120, filtertype: 'input', datafield: 'fireSource' },
+                        { text: '本山備註', columntype: 'textbox', editable: false, minwidth: 80, filtertype: 'input', datafield: 'ctNote' }
+                    ]
+                });
+            }
+            
+            function getLinkUrl(functionItems) {
+                var url = "../admin/" + functionItems + "?userPlaceId=" + $("#userPlaceId").val();
+                window.location.href = url;
+            }
+	    </script>
+	</head>
+	
+	<body class="">
+		<!-- HEADER -->
+		<header id="header">
+			<div id="logo-group">
+
+				<span id="logo" style="width: 0;"></span>
+            <h5 class="txt-color-white">   <b>中台禪寺</b> 消防安檢登錄系統</h5>
+
+			</div>
+
+
+			<!-- pulled right: nav area -->
+			<div class="pull-right">
+				
+				<!-- logout button -->
+				<div id="logout" class="btn-header transparent pull-right">
+				
+					<h6 class="txt-color-white">管理者 &nbsp;&nbsp;<th:block th:text="${UserName}"></th:block>&nbsp;&nbsp;<th:block th:text="${UserId}"></th:block>&nbsp;&nbsp;IP:<th:block th:text="${UserIp}"></th:block> 
+                    <span > <a class="btn btn-default btn-sm " href="logout">登出</a> </span>
+					</h6>
+
+				</div>
+				<!-- end logout button -->
+
+			</div>
+			<!-- end pulled right: nav area -->
+
+		</header>
+		<!-- END HEADER -->
+
+		<!-- Left panel : Navigation area -->
+		<!-- Note: This width of the aside area can be adjusted through LESS variables -->
+		<aside id="left-panel">
+            <nav>
+                <select id="userPlace" name="userPlace">
+                    <th:block th:each="upmi:${upmis}">
+                        <option th:text="${upmi.place}" th:value="${upmi.getPlaceId()}" th:selected="${upId==upmi.getPlaceId()}"></option>
+                    </th:block>
+                </select>
+                <input type="hidden" id="userPlaceId" name="userPlaceId" th:value="${upId}" />
+            </nav>
+            <nav th:switch="${UserType}">
+                <ul th:case="'admin'">
+                    <li>
+                        <a href="#" onclick="javascript:getLinkUrl('index')"><i class="fa fa-lg fa-fw fa-home txt-color-pink"></i> <span class="menu-item-parent">主頁面</span></a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="javascript:getLinkUrl('fireCheck')"><i class="fa fa-lg fa-fw fa-bar-chart-o txt-color-pink"></i> <span class="menu-item-parent">安檢登錄 / 調閱</span></a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="javascript:getLinkUrl('announceMsg')"><i class="fa fa-lg fa-fw fa-newspaper-o txt-color-pink"></i> <span class="menu-item-parent">公告訊息</span></a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="javascript:getLinkUrl('checkStatusMark')"><i class="fa fa-lg fa-fw fa-question txt-color-pink"></i> <span class="menu-item-parent">問題項狀態處理</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-lg fa-fw fa-print txt-color-pink"></i> <span class="menu-item-parent">檢查總表</span></a>
+                        <ul>
+                            <li>
+                                <a href="#" onclick="javascript:getLinkUrl('checkSummary')"><i class="fa fa-arrow-circle-right"></i> <span class="menu-item-parent">總表</span></a>
+                                <a href="#" onclick="javascript:getLinkUrl('checkResultFollow')"><i class="fa fa-arrow-circle-right"></i> <span class="menu-item-parent">進度追蹤</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-lg fa-fw fa-cog txt-color-pink"></i> <span class="menu-item-parent">管理設定</span></a>
+                        <ul>
+                            <li>
+                                <a href="#" onclick="javascript:getLinkUrl('userPlaceMapping')"><i class="fa fa-arrow-circle-right"></i> <span class="menu-item-parent">場所人員對應表</span></a>
+                                <a href="#" onclick="javascript:getLinkUrl('announceSet')"><i class="fa fa-arrow-circle-right"></i> <span class="menu-item-parent">公告訊息設定</span></a>
+                                <a href="#" onclick="javascript:getLinkUrl('onlineUsers')"><i class="fa fa-arrow-circle-right"></i> <span class="menu-item-parent">線上使用者查詢</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul th:case="'user'">
+                    <li>
+                        <a href="#" onclick="javascript:getLinkUrl('index')"><i class="fa fa-lg fa-fw fa-home txt-color-pink"></i> <span class="menu-item-parent">主頁面</span></a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="javascript:getLinkUrl('fireCheck')"><i class="fa fa-lg fa-fw fa-bar-chart-o txt-color-pink"></i> <span class="menu-item-parent">安檢登錄 / 調閱</span></a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="javascript:getLinkUrl('announceMsg')"><i class="fa fa-lg fa-fw fa-newspaper-o txt-color-pink"></i> <span class="menu-item-parent">公告訊息</span></a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="javascript:getLinkUrl('checkStatusMark')"><i class="fa fa-lg fa-fw fa-question txt-color-pink"></i> <span class="menu-item-parent">問題項狀態處理</span></a>
+                    </li>
+                 </ul>
+            </nav>
+            <span class="minifyme" data-action="minifyMenu"> 
+                <i class="fa fa-arrow-circle-left hit"></i> 
+            </span>
+        </aside>
+		<!-- END NAVIGATION -->
+
+		<!-- MAIN PANEL -->		
+		<div id="main" role="main">
+            <!-- MAIN CONTENT -->
+            <div id="content" style="height: 100%;">
+                <!-- widget grid -->
+                <section id="widget-grid" style="height: 100%;">
+                    <!-- row -->
+                    <div class="row" style="height: 100%;">
+                        <!-- NEW WIDGET START -->
+                        <article style="height: 100%;">
+                            <!-- Widget ID (each widget will need unique ID)-->
+                            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false" style="height: 100%;">
+                                <header>
+                                    <span class="fa fa-arrow-circle-right" style="margin-left: 5px; vertical-align:middle;"> 總表 </span>
+                                </header>
+                                <div>
+					               <div id="jqxToolBar" style="height: 5%; display:inline-flex; align-items:center; justify-content:flex-start;"></div>
+					            </div>
+					            <div id='jqxWidget' style="font-size: 13px; font-family: Verdana; float: left; width: 100%; height: 100%; background-color: white;">
+					            	<div id="accordion">
+                                        <h3 id="accordionIcon"></h3>
+					            	    <div id="recordgrid"></div>
+					            	</div>
+					                <div id="summarygrid"></div>
+					            </div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+            </div>
+            <br/><br/>
+        </div>
+		<!-- END MAIN PANEL -->
+		<div id='popWindow' style="font-size: 13px; font-family: Verdana; float: left; width: 120px;">
+            <div id="msgHeader"></div>
+            <div id="msgContent" style="margin: 10px">
+                <div id="msg"></div><br/><br/>
+                <div style="float: right;">
+                    <input type="button" value="確認" style="margin-bottom: 5px;" id="btnConfirm" /><br />
+                </div>
+            </div>
+        </div>
+        <div id="editWindow">
+            <div>編輯</div>
+            <div style="overflow: hidden;">
+                <table style="width:90%;height:80%">
+                    <tr>
+                        <td align="right"><label id="editTitle">場所</label>:</td>
+                        <td align="left" colspan="3"><input id="titleContent" disabled="disabled" style="width:100%;"/></td>
+                    </tr>
+                    <tr>
+                        <td align="right">本山備註:</td>
+                        <td align="left" colspan="3"><input id="ctNote" style="width:100%;"></td>
+                    </tr>
+                </table>
+                <div style="float: right; margin-top: 5px;">
+                    <input type="button" value="確認" style="margin-bottom: 5px;" id="okBtn" />
+                    <input type="button" value="取消" style="margin-bottom: 5px;" id="cancelBtn" />
+                </div>
+                <input type="hidden" id="fcsId" />
+                <input type="hidden" id="fcrId" />
+                <input type="hidden" id="row" />
+            </div>
+       	</div>
+		<div style="width: 100%;">
+            <div id='exportWindow' style="font-size: 13px; font-family: Verdana; float: left;">
+                <div id="exportWinHeader">匯出檢查總表表&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="匯出" style="margin-bottom: 5px;" id="exportWinBtn" /></div>
+                <div id="exportContent">
+	                <div id="exportTitle" style="text-align: center"></div>
+	                <div id="exportDate" style="float: right"></div>
+	                <div id="exportgrid"></div>      
+                </div>
+            </div>
+        </div>
+
+        <!-- IMPORTANT: APP CONFIG -->
+        <script src="js/app.config.js"></script>
+
+        <!-- MAIN APP JS FILE -->
+        <script src="js/app.min.js"></script>
+	</body>
+</html>

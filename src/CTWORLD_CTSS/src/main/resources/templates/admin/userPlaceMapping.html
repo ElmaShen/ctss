@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en-us" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta content="text/html;charset=UTF-8">
+		<title>中台禪寺消防安檢登錄系統- 場所人員對應表 </title>
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<!-- Basic Styles -->
+		<link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome.min.css">
+
+		<!-- SmartAdmin Styles : Caution! DO NOT change the order -->
+		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production-plugins.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-skins.min.css">
+
+		<!-- SmartAdmin RTL Support -->
+		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.min.css"> 
+
+		<!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
+		<link rel="stylesheet" type="text/css" media="screen" href="css/demo.min.css">
+
+		<!-- FAVICONS -->
+		<link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
+
+		<!-- GOOGLE FONT -->
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+
+		<!-- Specifying a Webpage Icon for Web Clip 
+			 Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
+		<link rel="apple-touch-icon" href="img/splash/sptouch-icon-iphone.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="img/splash/touch-icon-ipad.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="img/splash/touch-icon-iphone-retina.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="img/splash/touch-icon-ipad-retina.png">
+		
+		<!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		
+		<!-- Startup image for web apps -->
+		<link rel="apple-touch-startup-image" href="img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+		<link rel="apple-touch-startup-image" href="img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+		<link rel="apple-touch-startup-image" href="img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+	
+        <!-- import jQWidgets js -->	
+        <link type="text/css" rel="Stylesheet" th:href="@{js/jqwidgets/styles/jqx.base.css}" />
+        <link type="text/css" rel="Stylesheet" th:href="@{js/jqwidgets/styles/jqx.energyblue.css}" />
+        <link type="text/css" rel="Stylesheet" th:href="@{js/jqwidgets/styles/jqx.orange.css}" />
+        <link type="text/css" rel="Stylesheet" th:href="@{css/ctssBlue.css}" />
+        <link type="text/css" rel="Stylesheet" th:href="@{css/ctssGreen.css}" />
+        <script type="text/javascript" th:src="@{js/libs/jquery-2.1.1.min.js}"></script>
+        <script type="text/javascript" th:src="@{js/libs/jquery-ui-1.10.3.min.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxcore.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxdata.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxbuttons.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxscrollbar.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxlistbox.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxdropdownlist.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxmenu.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxcombobox.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxinput.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxtoolbar.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxgrid.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxgrid.sort.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxgrid.pager.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxgrid.selection.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxgrid.edit.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxgrid.filter.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxgrid.columnsresize.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxdatetimeinput.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxcalendar.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxtooltip.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/globalization/globalize.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxwindow.js}"></script>  
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxcheckbox.js}"></script>  
+        
+	    <style type="text/css">
+            body, html, #main {
+                min-height: 100% !important;
+                height: 100%;
+                overflow: hidden;
+            }
+            table {
+                margin: 10px; 
+                height: 85%;
+            } 
+            #userPlace {
+				width: 100%;
+			}
+			html {
+				font-size: 100%;
+			}
+			h5 {
+				font-size: 1.5rem;
+				position:absolute;
+			}
+            aside {
+                background: #dfe2ed;
+            }
+			aside nav {
+				font-size:1rem;
+			}
+			aside nav span {
+				font-size:1rem;
+			}
+            .jqx-widget, .jqx-widget-header, .jqx-widget-content, input[type=text].jqx-input, div, span, label, td {
+                font-size: 16px;
+            }
+            .jqx-button-ctssGreen {
+                color:#FFFFFF;
+                text-shadow:none;
+                border-color:#59AD5B;
+                background-color:#59AD5B;
+                background-image:-moz-linear-gradient(top,#59AD5B,#59AD5B);
+                background-image:-ms-linear-gradient(top,#59AD5B,#59AD5B);
+                background-image:-o-linear-gradient(top,#59AD5B,#59AD5B);
+                background-image:-webkit-gradient(linear,center top,center bottom,from(#59AD5B),to(#59AD5B));
+                background-image:-webkit-linear-gradient(top,#59AD5B,#59AD5B);
+                background-image:linear-gradient(top,#59AD5B,#59AD5B);
+                background-image:linear-gradient(to bottom,#59AD5B,#59AD5B);
+                -moz-background-clip:padding;
+                background-clip:padding-box;
+                -webkit-background-clip:padding-box;
+                font-family:Verdana;
+            }
+        </style>
+	    
+	    <script type="text/javascript">	  
+	    
+	        /*<![CDATA[*/
+	        var userType = '[[${UserType}]]';
+	        /*]]>*/
+	        
+            var editedRows = new Array();
+            var editRow = -1;
+	        
+		    $(document).ready(function () {
+	            
+                initGridData();                 
+                
+                $("#winEdit").jqxWindow({
+                    width: '100%', height: '40%', theme: 'energyblue', maxWidth: 1024, resizable: true,  isModal: true, autoOpen: false, cancelButton: $("#btnCancel")           
+                });
+                $("#winEdit").on('open', function () {
+                    $("#manager").jqxInput('selectAll');
+                });
+                $("#winDelete").jqxWindow({
+                    width: 420, height: 170, theme: 'energyblue', resizable: false,  isModal: true, autoOpen: false, cancelButton: $("#btnCancelD")           
+                });
+                $("#winAdd").jqxWindow({
+                    width: '100%', height: '40%', theme: 'energyblue', maxWidth: 1024, resizable: false,  isModal: true, autoOpen: false, cancelButton: $("#btnCancelA")           
+                });
+                $("#winAdd").on('open', function () {
+                    $("#placeTypeA").jqxInput('selectAll');
+                });
+                $("#jqxwindow").jqxWindow({ width: 300, height: 150, theme: 'energyblue', isModal: true, autoOpen: false, cancelButton: $("#btnConfirm") });
+                $("#btnConfirm").jqxButton({ theme: 'ctssBlue' });
+                
+                $("#btnAdd").jqxButton({ width: 80, height: 30, theme: 'ctssGreen' });
+                $("#btnCancel").jqxButton({width: 40, theme: 'orange'});
+                $("#btnCancelD").jqxButton({width: 40, theme: 'orange'});
+                $("#btnCancelA").jqxButton({width: 40, theme: 'orange'});
+                $("#btnOk").jqxButton({width: 40, theme: 'ctssBlue'});
+                $("#btnOkD").jqxButton({width: 40, theme: 'ctssBlue'});
+                $("#btnOkA").jqxButton({width: 40, theme: 'ctssBlue'});
+                
+                $("#btnOk").click(function () {
+                    if (editRow >= 0) {
+                        var row = { upmiId: $("#upmiId").val(), placeType: $("#placeType").val(), placeId: $("#placeId").val(), place: $("#place").val(), manager: $("#manager").val(),
+                                managerId: $("#managerId").val(), needDailyCheckFire: $("#needDailyCheckFire").jqxCheckBox('checked'),
+                                examiner1: $("#examiner1").val(), examiner1Id: $("#examiner1Id").val(), enabled: $("#enabled").jqxCheckBox('checked'),
+                                examiner2: $("#examiner2").val(), examiner2Id: $("#examiner2Id").val(), unitCode: $("#unitCode").val()
+                        };
+                        var rowID = $('#jqxgrid').jqxGrid('getrowid', editRow);
+                        $('#jqxgrid').jqxGrid('updaterow', rowID, row);
+                        
+                        $("#winEdit").jqxWindow('hide');
+                        $('#jqxgrid').jqxGrid('clearselection');
+                    }
+                });
+                
+                $("#btnOkD").click(function () {
+                    if (editRow >= 0) {
+                        var row = { upmiId: $("#upmiIdD").val(), placeId: $("#placeIdD").val(), place: $("#placeD").val() };
+                        
+                        var rowid = $('#jqxgrid').jqxGrid('getrowid', editRow);
+                        $('#jqxgrid').jqxGrid('deleterow', rowid);
+
+                        $("#winDelete").jqxWindow('hide');
+                        $('#jqxgrid').jqxGrid('clearselection');
+                    }
+                    
+                });
+                
+                $("#btnAdd").click(function () {
+                    var placeTypes = [];
+                    $.ajax({
+                        url: '../api/admin/userPlaceMapping/placeTypeList',
+                        type: 'get',
+                        dataType: 'json',
+                        async: false,
+                        success: function(data) {
+                            data.forEach(function(obj) {
+                                placeTypes.push(obj);
+                            })
+                        } 
+                    });
+                    $("#placeTypeA").jqxDropDownList({
+                        selectedIndex: 0, source: placeTypes, width: 200, height: 25
+                    });
+                    
+                    var offset = $("#jqxgrid").offset();
+                    $("#winAdd").jqxWindow({ position: 'relative' });
+                    $("#needDailyCheckFireA").jqxCheckBox({ checked: false, rtl: true });
+                    $("#enabledA").jqxCheckBox({ checked: true, rtl: true });
+                    $("#placeA").val('');
+                    $("#managerA").val('');
+                    $("#managerIdA").val('');
+                    $("#examiner1A").val('');
+                    $("#examiner1IdA").val('');
+                    $("#examiner2A").val('');
+                    $("#examiner2IdA").val('');
+                    $("#unitCodeA").val('');
+                    $("#winAdd").jqxWindow('open');
+                });
+	            
+                $("#btnOkA").click(function () {
+                    var newData = { placeType: $("#placeTypeA").val(), place: $("#placeA").val(), manager: $("#managerA").val(),
+                            managerId: $("#managerIdA").val(), needDailyCheckFire: $("#needDailyCheckFireA").jqxCheckBox('checked'),
+                            examiner1: $("#examiner1A").val(), examiner1Id: $("#examiner1IdA").val(), enabled: $("#enabledA").jqxCheckBox('checked'),
+                            examiner2: $("#examiner2A").val(), examiner2Id: $("#examiner2IdA").val(), unitCode: $("#unitCodeA").val()
+                    };
+                    var rowID = $('#jqxgrid').jqxGrid('getrowid', editRow);
+                    $('#jqxgrid').jqxGrid('addrow', null, newData);
+
+                    $("#winAdd").jqxWindow('hide');
+                    $('#jqxgrid').jqxGrid('clearselection');
+                });
+                
+                $("#userPlace").change(function () {
+                    $("#userPlaceId").val($("#userPlace option:selected").val());
+                });
+
+	        });    // End Of $(document).ready(function ()
+		    
+	        function getUserPlaceMappingDatas() {
+	            var resultData;
+                $.ajax({
+                    url: '../api/admin/userPlaceMapping/allDataList',
+                    type: 'get',
+                    dataType: 'json',
+                    async: false,
+                    success: function(data) {
+                        resultData = data;
+                    } 
+                 });
+                return resultData;
+	        }
+	         
+            
+            function initGridData() {
+                
+                var gridSource =
+                {
+                    dataType: "json",
+                    localdata: getUserPlaceMappingDatas(),
+                    datafields:
+                    [
+                        { name: 'upmiId', type: 'number' },
+                        { name: 'placeType', type: 'string' },
+                        { name: 'placeId', type: 'string' },
+                        { name: 'place', type: 'string' },
+                        { name: 'enabled', type: 'bool' },
+                        { name: 'needDailyCheckFire', type: 'bool'},
+                        { name: 'place', type: 'string' },
+                        { name: 'manager', type: 'string' },
+                        { name: 'managerId', type: 'string' },
+                        { name: 'examiner1', type: 'string' },
+                        { name: 'examiner1Id', type: 'string' },
+                        { name: 'examiner2', type: 'string' },
+                        { name: 'examiner2Id', type: 'string' },
+                        { name: 'ctNote', type: 'string' },
+                        { name: 'unitCode', type: 'string' }
+                    ],
+                    id: 'upmiId',
+                    addrow: function (rowid, rowdata, position, commit) {
+                        var rowindex = $("#jqxgrid").jqxGrid('getrowboundindexbyid', rowid);          
+                             
+                        editedRows.push(rowdata);
+                        
+                        $.ajax({
+                            url: '../api/admin/userPlaceMapping/updateData',
+                            data: {
+                                "updateType": "Insert",
+                                "updateDatas": JSON.stringify(editedRows)
+                            },
+                            type: 'post',
+                            dataType: 'json',
+                            async: false,
+                            success: function(data) {
+                                var result = data.success;
+                                if(result == "Y") {
+                                    commit(true, data.id); 
+                                }
+                                popupWin("執行結果", data.msg);
+                            },
+                            error: function(data) {  
+                                popupWin("執行發生錯誤", "請洽系統管理員!");
+                            }
+                        });
+
+                        // Reload Data
+                        gridSource.localdata = getUserPlaceMappingDatas();
+                        $("#jqxgrid").jqxGrid('updatebounddata', 'cells');
+                        
+                        editedRows = new Array();
+                    },
+                    updaterow: function (rowid, rowdata, commit) {
+                        var rowindex = $("#jqxgrid").jqxGrid('getrowboundindexbyid', rowid);          
+                             
+                        editedRows.push(rowdata);
+                        
+                        $.ajax({
+                            url: '../api/admin/userPlaceMapping/updateData',
+                            data: {
+                                "updateType": "Update",
+                                "updateDatas": JSON.stringify(editedRows)
+                            },
+                            type: 'post',
+                            dataType: 'json',
+                            async: false,
+                            success: function(data) {
+                                var result = data.success;
+                                if(result == "Y") {
+                                    commit(true, data.id); 
+                                }
+                                popupWin("執行結果", data.msg);
+                            },
+                            error: function(data) {  
+                                popupWin("執行發生錯誤", "請洽系統管理員!");
+                            }
+                        });
+
+                        // Reload Data
+                        gridSource.localdata = getUserPlaceMappingDatas();
+                        $("#jqxgrid").jqxGrid('updatebounddata', 'cells');
+                        
+                        editedRows = new Array();
+                    },
+                    deleterow: function (rowid, commit) {
+                        var rowindex = $("#jqxgrid").jqxGrid('getrowboundindexbyid', rowid);  
+                        var rowdata = $("#jqxgrid").jqxGrid('getrowdata', rowindex);
+                        
+                        editedRows.push(rowdata);
+                        
+                        $.ajax({
+                            url: '../api/admin/userPlaceMapping/updateData',
+                            data: {
+                                "updateType": "Delete",
+                                "updateDatas": JSON.stringify(editedRows)
+                            },
+                            type: 'post',
+                            dataType: 'json',
+                            async: false,
+                            success: function(data) {
+                                var result = data.success;
+                                if(result == "Y") {
+                                    commit(true, data.id); 
+                                }
+                                popupWin("執行結果", data.msg);
+                            },
+                            error: function(data) {  
+                                popupWin("執行發生錯誤", "請洽系統管理員!");
+                            }
+                        });
+
+                        // Reload Data
+                        gridSource.localdata = getUserPlaceMappingDatas();
+                        $("#jqxgrid").jqxGrid('updatebounddata', 'cells');
+                        
+                        editedRows = new Array();
+                    } 
+                };
+                
+                var dataAdapter = new $.jqx.dataAdapter(gridSource);
+                
+                $("#jqxgrid").jqxGrid(
+                {
+                    width: '100%',
+                    height: '90%',
+                    rowsheight: 36,
+                    source: dataAdapter,
+                    showfilterrow: true,
+                    filterable: true,
+                    columnsresize: true,
+                    theme: 'energyblue',
+                    ready: function() {
+//                         $("#jqxgrid").jqxGrid('clear');
+                    },
+                    columns: [
+                         { text: 'No.', sortable: false, filterable: false, editable: false,
+                             groupable: false, draggable: false, resizable: false,
+                             datafield: '', columntype: 'number', width: '3%', minWidth: '40',
+                             cellsrenderer: function (row, column, value) {
+                                 return "<div style='margin:4px;'>" + (value + 1) + "</div>";
+                             }
+                         },
+                         { text: '編輯', datafield: 'Edit', filterable: false, width: '40', align: 'center', cellsalign: 'center',
+                             cellsrenderer: function (row, column, value) {
+                                 return '<div style="text-align: center;"><img name="imgEdit" height="24" width="24" src="img/pencil.png" alt="Edit" style="margin-top: 6px;" /></div>';
+                            }
+                         },
+                         { text: '刪除', datafield: 'Delete', filterable: false, width: '40', align: 'center', cellsalign: 'center',
+                             cellsrenderer: function () {
+                                 return '<div style="text-align: center;"><img id="imgDelete" height="24" width="24" src="img/paper-bin.png" alt="Edit" style="margin-top: 6px;" /></div>';
+                             }
+                         },
+                         { text: '場所分類', filtertype: 'input', datafield: 'placeType', width: '8%' },
+                         { text: '場所識別碼', filtertype: 'input', datafield: 'placeId', width: '6%', minWidth: '100'},
+                         { text: '啟用', filtertype: 'bool', datafield: 'enabled', columntype: 'checkbox', width: '5%'},
+                         { text: '日常火源', filtertype: 'bool', datafield: 'needDailyCheckFire', columntype: 'checkbox', width: '6%', minWidth: '70'},
+                         { text: '場所', filtertype: 'input', datafield: 'place', minWidth: '200' },
+                         { text: '負責人', filtertype: 'input', datafield: 'manager', width: '7%'},
+                         { text: '負責人ID', filtertype: 'input', datafield: 'managerId', width: '8%'},
+                         { text: '檢查者1', filtertype: 'input', datafield: 'examiner1', width: '7%'},
+                         { text: '檢查者1ID', filtertype: 'input', datafield: 'examiner1Id', width: '8%'},
+                         { text: '檢查者2', filtertype: 'input', datafield: 'examiner2', width: '7%'},
+                         { text: '檢查者2ID', filtertype: 'input', datafield: 'examiner2Id', width: '8%'},
+                         { text: '備註', filtertype: 'input', datafield: 'ctNote', width: '5%'},
+                         { text: '精舍代碼', filtertype: 'input', datafield: 'unitCode', width: '6%', minWidth: '70'},
+                     ]
+                });
+                
+                $("#jqxgrid").on('cellclick', function (event) {
+                    editRow = event.args.rowindex;
+                    var columnindex = event.args.columnindex;
+                    if (columnindex == 1) {
+                         var offset = $("#jqxgrid").offset();
+                         $("#winEdit").jqxWindow({ position: 'relative' });
+                         var dataRecord = $("#jqxgrid").jqxGrid('getrowdata', editRow);
+                         $("#upmiId").val(dataRecord.upmiId);
+                         $("#placeType").val(dataRecord.placeType);
+                         $("#placeId").val(dataRecord.placeId);
+                         $("#place").val(dataRecord.place);
+                         $("#manager").val(dataRecord.manager);
+                         $("#managerId").val(dataRecord.managerId);
+                         $("#needDailyCheckFire").jqxCheckBox({ checked: dataRecord.needDailyCheckFire, rtl: true });
+                         $("#examiner1").val(dataRecord.examiner1);
+                         $("#examiner1Id").val(dataRecord.examiner1Id);
+                         $("#enabled").jqxCheckBox({ checked: dataRecord.enabled, rtl: true });
+                         $("#examiner2").val(dataRecord.examiner2);
+                         $("#examiner2Id").val(dataRecord.examiner2Id);
+                         $("#unitCode").val(dataRecord.unitCode);
+                         $("#winEdit").jqxWindow('open');
+                        
+                    } else if (columnindex == 2) {
+                         var offset = $("#jqxgrid").offset();
+                         $("#winDelete").jqxWindow({ position: 'relative' });
+                         var dataRecord = $("#jqxgrid").jqxGrid('getrowdata', editRow);
+                         $("#upmiIdD").val(dataRecord.upmiId);
+                         $("#placeIdD").val(dataRecord.placeId);
+                         $("#placeD").val(dataRecord.place);
+                         $("#winDelete").jqxWindow('open');
+                    }
+                });
+            }
+	        
+            function popupWin(header, content) {
+                $("#msgHeader").empty().append("<span>" + header + "</span>");
+                $("#msg").empty().append("<span>" + content + "</span>");
+                $("#jqxwindow").jqxWindow('open');
+            }
+            
+            function getLinkUrl(functionItems) {
+                var url = "../admin/" + functionItems + "?userPlaceId=" + $("#userPlaceId").val();
+                window.location.href = url;
+            }
+			
+	    </script>
+	</head>
+	
+	<body class='default'>
+		<!-- HEADER -->
+		<header id="header">
+			<div id="logo-group">
+
+				<span id="logo" style="width: 0;"></span>
+            <h5 class="txt-color-white">   <b>中台禪寺</b> 消防安檢登錄系統</h5>
+
+			</div>
+
+
+			<!-- pulled right: nav area -->
+			<div class="pull-right">
+				
+				<!-- logout button -->
+				<div id="logout" class="btn-header transparent pull-right">
+				
+					<h6 class="txt-color-white">管理者 &nbsp;&nbsp;<th:block th:text="${UserName}"></th:block>&nbsp;&nbsp;<th:block th:text="${UserId}"></th:block>&nbsp;&nbsp;IP:<th:block th:text="${UserIp}"></th:block> 
+                    <span > <a class="btn btn-default btn-sm " href="logout">登出</a> </span>
+					</h6>
+
+				</div>
+				<!-- end logout button -->
+
+			</div>
+			<!-- end pulled right: nav area -->
+
+		</header>
+		<!-- END HEADER -->
+
+		<!-- Left panel : Navigation area -->
+		<!-- Note: This width of the aside area can be adjusted through LESS variables -->
+		<aside id="left-panel">
+            <nav>
+                <select id="userPlace" name="userPlace">
+                    <th:block th:each="upmi:${upmis}">
+                        <option th:text="${upmi.place}" th:value="${upmi.getPlaceId()}" th:selected="${upId==upmi.getPlaceId()}"></option>
+                    </th:block>
+                </select>
+                <input type="hidden" id="userPlaceId" name="userPlaceId" th:value="${upId}" />
+            </nav>
+            <nav th:switch="${UserType}">
+                <ul th:case="'admin'">
+                    <li>
+                        <a href="#" onclick="javascript:getLinkUrl('index')"><i class="fa fa-lg fa-fw fa-home txt-color-pink"></i> <span class="menu-item-parent">主頁面</span></a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="javascript:getLinkUrl('fireCheck')"><i class="fa fa-lg fa-fw fa-bar-chart-o txt-color-pink"></i> <span class="menu-item-parent">安檢登錄 / 調閱</span></a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="javascript:getLinkUrl('announceMsg')"><i class="fa fa-lg fa-fw fa-newspaper-o txt-color-pink"></i> <span class="menu-item-parent">公告訊息</span></a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="javascript:getLinkUrl('checkStatusMark')"><i class="fa fa-lg fa-fw fa-question txt-color-pink"></i> <span class="menu-item-parent">問題項狀態處理</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-lg fa-fw fa-print txt-color-pink"></i> <span class="menu-item-parent">檢查總表</span></a>
+                        <ul>
+                            <li>
+                                <a href="#" onclick="javascript:getLinkUrl('checkSummary')"><i class="fa fa-arrow-circle-right"></i> <span class="menu-item-parent">總表</span></a>
+                                <a href="#" onclick="javascript:getLinkUrl('checkResultFollow')"><i class="fa fa-arrow-circle-right"></i> <span class="menu-item-parent">進度追蹤</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-lg fa-fw fa-cog txt-color-pink"></i> <span class="menu-item-parent">管理設定</span></a>
+                        <ul>
+                            <li>
+                                <a href="#" onclick="javascript:getLinkUrl('userPlaceMapping')"><i class="fa fa-arrow-circle-right"></i> <span class="menu-item-parent">場所人員對應表</span></a>
+                                <a href="#" onclick="javascript:getLinkUrl('announceSet')"><i class="fa fa-arrow-circle-right"></i> <span class="menu-item-parent">公告訊息設定</span></a>
+                                <a href="#" onclick="javascript:getLinkUrl('onlineUsers')"><i class="fa fa-arrow-circle-right"></i> <span class="menu-item-parent">線上使用者查詢</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul th:case="'user'">
+                    <li>
+                        <a href="#" onclick="javascript:getLinkUrl('index')"><i class="fa fa-lg fa-fw fa-home txt-color-pink"></i> <span class="menu-item-parent">主頁面</span></a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="javascript:getLinkUrl('fireCheck')"><i class="fa fa-lg fa-fw fa-bar-chart-o txt-color-pink"></i> <span class="menu-item-parent">安檢登錄 / 調閱</span></a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="javascript:getLinkUrl('announceMsg')"><i class="fa fa-lg fa-fw fa-newspaper-o txt-color-pink"></i> <span class="menu-item-parent">公告訊息</span></a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="javascript:getLinkUrl('checkStatusMark')"><i class="fa fa-lg fa-fw fa-question txt-color-pink"></i> <span class="menu-item-parent">問題項狀態處理</span></a>
+                    </li>
+                 </ul>
+            </nav>
+            <span class="minifyme" data-action="minifyMenu"> 
+                <i class="fa fa-arrow-circle-left hit"></i> 
+            </span>
+        </aside>
+		<!-- END NAVIGATION -->
+
+		<!-- MAIN PANEL -->		
+		<div id="main" role="main">
+		  <!-- MAIN CONTENT -->
+            <div id="content" style="height: 100%;">
+                <!-- widget grid -->
+                <section id="widget-grid" style="height: 100%;">
+                    <!-- row -->
+                    <div class="row" style="height: 100%;">
+                        <!-- NEW WIDGET START -->
+                        <article style="height: 100%;">
+                            <!-- Widget ID (each widget will need unique ID)-->
+                            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false" style="height: 100%;">
+                                <header>
+                                    <span class="fa fa-arrow-circle-right" style="margin-left: 5px; vertical-align:middle;"> 場所人員對應表 </span>
+                                </header>
+                                
+					            <div id='jqxWidget' style="height: 100%;">
+                                    <input id="btnAdd" type="button" value="新增" style="margin-bottom: 5px;"/>
+					                <div id="jqxgrid" style="height: 100%; margin-bottom: 20px;"></div>
+					                <div style="margin-top: 30px;">
+							            <div id="cellbegineditevent"></div>
+							            <div style="margin-top: 10px;" id="cellendeditevent"></div>
+                                    </div>
+                                    
+					            </div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+            </div>
+	        <br/><br/>
+		</div>
+		<!-- END MAIN PANEL -->
+        <div id='jqxwindow' style="font-size: 13px; font-family: Verdana; float: left; width: 120px;">
+            <div id="msgHeader"></div>
+            <div id="msgContent" style="margin: 10px">
+                <div id="msg"></div><br/><br/>
+                <div style="float: right;">
+                    <input type="button" value="確認" style="margin-bottom: 5px;" id="btnConfirm" /><br />
+                </div>
+            </div>
+        </div>
+		
+		<div id="winEdit" style="width: 100%;">
+            <div>編輯</div>
+            <div style="overflow: hidden;">
+                <input type="hidden" id="upmiId" />
+                <input type="hidden" id="placeId" />
+                <table>
+                    <col width="11%">
+                    <col width="20%">
+                    <col width="11%">
+                    <col width="20%">
+                    <col width="11%">
+                    <col width="11%">
+                    <col width="16%">
+                    <tr>
+                        <td align="right" style="padding-right: 5px;">場所分類</td>
+                        <td align="left" colspan="6"><input id="placeType" size="50" readonly/></td>
+                    </tr>
+                    <tr>
+                        <td align="right" style="padding-right: 5px;">場所</td>
+                        <td align="left" colspan="6" ><input id="place" size="60" readonly/></td>
+                    </tr>
+                    <tr>
+                        <td align="right" style="padding-right: 5px;">負責人</td>
+                        <td align="left"><input id="manager" size="20" maxlength="20"/></td>
+                        <td align="right" style="padding-right: 5px;">負責人ID</td>
+                        <td align="left"><input id="managerId" size="20" maxlength="20"/></td>
+                        <td align="right" colspan="3" ><div id="needDailyCheckFire" style="float: right;">日常火源控制項</div></td>
+                        
+                    </tr>
+                    <tr>
+                        <td align="right" style="padding-right:5px; width:">檢查者1</td>
+                        <td align="left"><input id="examiner1" size="20" maxlength="20"/></td>
+                        <td align="right" style="padding-right: 5px;">檢查者1ID</td>
+                        <td align="left"><input id="examiner1Id" size="20" maxlength="20"/></td>
+                        <td align="right" colspan="3"><div id="enabled" style="float: right;">啟用</div></td>
+                        
+                    </tr>
+                    <tr>
+                        <td align="right" style="padding-right: 5px;">檢查者2</td>
+                        <td align="left"><input id="examiner2" size="20" maxlength="20"/></td>
+                        <td align="right" style="padding-right: 5px;">檢查者2ID</td>
+                        <td align="left"><input id="examiner2Id" size="20" maxlength="20"/></td>
+                        <td align="right" style="padding-right: 5px;">精舍代碼</td>
+                        <td align="left"><input id="unitCode" size="5" maxlength="3"/></td>
+                        <td align="right"><input type="button" id="btnOk" value="確定" style="margin-right: 5px;"/><input id="btnCancel" type="button" value="取消" /></td>
+                    </tr>
+                </table>
+            </div>
+       </div>
+       <div id="winDelete">
+            <div>刪除</div>
+            <div style="overflow: hidden;">
+                <input type="hidden" id="upmiIdD" />
+                <input type="hidden" id="placeIdD" />
+                <table>
+                    <tr>
+                        <td align="left"><input id="placeD" size="40" readonly/></td>
+                    </tr>
+                    <tr>
+                        <td align="left" style="padding-left: 15px;">您確定要刪除這筆資料嗎?</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-top: 10px;" align="right"><input style="margin-right: 5px;" type="button" id="btnOkD" value="確定" /><input id="btnCancelD" type="button" value="取消" /></td>
+                    </tr>
+                </table>
+            </div>
+       </div>
+       <div id="winAdd" style="width: 100%;">
+            <div>新增</div>
+            <div style="overflow: hidden;">
+                <table>
+                    <col width="11%">
+                    <col width="20%">
+                    <col width="11%">
+                    <col width="20%">
+                    <col width="11%">
+                    <col width="11%">
+                    <col width="16%">
+                    <tr>
+                        <td align="right" style="padding-right: 5px;">場所分類</td>
+                        <td align="left" colspan="6"><div id="placeTypeA"></div></td>
+                    </tr>
+                    <tr>
+                        <td align="right" style="padding-right: 5px;">場所</td>
+                        <td align="left" colspan="6" ><input id="placeA" size="60" maxlength="100"/></td>
+                    </tr>
+                    <tr>
+                        <td align="right" style="padding-right:5px;">負責人</td>
+                        <td align="left"><input id="managerA" size="20" maxlength="20"/></td>
+                        <td align="right" style="padding-right: 5px;">負責人ID</td>
+                        <td align="left"><input id="managerIdA" size="20" maxlength="20"/></td>
+                        <td align="right" colspan="3"><div id="needDailyCheckFireA" style="float: right;">日常火源控制項</div></td>
+                        
+                    </tr>
+                    <tr>
+                        <td align="right" style="padding-right:5px;">檢查者1</td>
+                        <td align="left"><input id="examiner1A" size="20" maxlength="20"/></td>
+                        <td align="right" style="padding-right: 5px;">檢查者1ID</td>
+                        <td align="left"><input id="examiner1IdA" size="20" maxlength="20"/></td>
+                        <td align="right" colspan="3"><div id="enabledA" style="float: right;">啟用</div></td>
+                        
+                    </tr>
+                    <tr>
+                        <td align="right" style="padding-right: 5px;">檢查者2</td>
+                        <td align="left"><input id="examiner2A" size="20" maxlength="20"/></td>
+                        <td align="right" style="padding-right: 5px;">檢查者2ID</td>
+                        <td align="left"><input id="examiner2IdA" size="20" maxlength="20"/></td>
+                        <td align="right" style="padding-right: 5px;">精舍代碼</td>
+                        <td align="left"><input id="unitCodeA"  size="5" maxlength="3"/></td>
+                        <td align="right"><input type="button" id="btnOkA" value="確定" style="margin-right: 5px;"/><input id="btnCancelA" type="button" value="取消" /></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- IMPORTANT: APP CONFIG -->
+        <script src="js/app.config.js"></script>
+
+        <!-- MAIN APP JS FILE -->
+        <script src="js/app.min.js"></script>
+	</body>
+</html>

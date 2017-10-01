@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en-us" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta content="text/html;charset=UTF-8">
+		<title>中台禪寺消防安檢登錄系統- 進度追蹤</title>
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<!-- Basic Styles -->
+		<link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome.min.css">
+
+		<!-- SmartAdmin Styles : Caution! DO NOT change the order -->
+		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production-plugins.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-skins.min.css">
+
+		<!-- SmartAdmin RTL Support -->
+		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.min.css"> 
+
+		<!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
+		<link rel="stylesheet" type="text/css" media="screen" href="css/demo.min.css">
+
+		<!-- FAVICONS -->
+		<link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
+
+		<!-- GOOGLE FONT -->
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+
+		<!-- Specifying a Webpage Icon for Web Clip 
+			 Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
+		<link rel="apple-touch-icon" href="img/splash/sptouch-icon-iphone.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="img/splash/touch-icon-ipad.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="img/splash/touch-icon-iphone-retina.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="img/splash/touch-icon-ipad-retina.png">
+		
+		<!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		
+		<!-- Startup image for web apps -->
+		<link rel="apple-touch-startup-image" href="img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+		<link rel="apple-touch-startup-image" href="img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+		<link rel="apple-touch-startup-image" href="img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+		
+		
+	
+        <!-- import jQWidgets js -->	
+        <link type="text/css" rel="Stylesheet" th:href="@{js/jqwidgets/styles/jqx.base.css}" />
+        <link type="text/css" rel="Stylesheet" th:href="@{js/jqwidgets/styles/jqx.energyblue.css}" />
+        <link type="text/css" rel="Stylesheet" th:href="@{css/ctssBlue.css}" />
+        <script type="text/javascript" th:src="@{js/libs/jquery-2.1.1.min.js}"></script>
+        <script type="text/javascript" th:src="@{js/libs/jquery-ui-1.10.3.min.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxcore.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxdata.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxbuttons.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxscrollbar.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxlistbox.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxdropdownlist.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxmenu.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxcombobox.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxinput.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxTextArea.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxtoolbar.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxgrid.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxgrid.sort.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxgrid.pager.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxgrid.selection.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxgrid.edit.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxgrid.filter.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxgrid.columnsresize.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxdatetimeinput.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxcalendar.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxtooltip.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/globalization/globalize.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxwindow.js}"></script>  
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxdata.export.js}"></script>  
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxgrid.export.js}"></script>  
+        
+	    <style type="text/css">
+	        .editedRow {
+	          color: #b90f0f !important;
+	          font-style: italic;
+	        }
+	        div.inline {
+	        	display: inline;
+	        }
+	        html, body, #main{
+	        	min-height: 100% !important;
+	        	height: 	100%;
+	        	overflow:	hidden;
+	        }
+	        #userPlace {
+				width: 100%;
+			}
+			html {
+				font-size: 100%;
+			}
+			h5 {
+				font-size: 1.5rem;
+				position:absolute;
+			}
+            aside {
+                background: #dfe2ed;
+            }
+			aside nav {
+				font-size:1rem;
+			}
+			aside nav span {
+				font-size:1rem;
+			}
+            .jqx-widget, .jqx-widget-header, .jqx-widget-content, input[type=text].jqx-input, div, span, label, td {
+                font-size: 16px;
+            }
+            .jqx-toolbar {
+                background-color: #FFFFFF !important;
+            }
+        </style>
+	    
+	    <script type="text/javascript">
+	        var editedRows = new Array();
+	        var checkStatus = "全部" ;
+	        var gridSource ;
+	        var statusItem = ['已送單','處理中','已完成'];
+	        var symbolItem = ['O','V','X'];
+	        
+		    $(document).ready(function () {
+		    	
+		    	initRecordData();;
+                
+		        $("#userPlace").change(function(){
+		            $('#jqxToolBar').jqxToolBar('refresh'); 
+		        });
+		        
+		        $("#popWindow").jqxWindow({ height: 150, width: 300, theme: 'energyblue', isModal: true, autoOpen: false });
+                
+	            $("#jqxToolBar").jqxToolBar({
+	                width: '100%', height: 60, tools: 'custom dropdownlist toggleButton',
+	                initTools: function (type, index, tool, menuToolIninitialization) {
+	                    switch (index) {
+	                    case 0:
+	                        tool.text("狀態");
+	                        break;
+	                    case 1:
+	                    	tool.jqxDropDownList({ width: 75, height: 30, source: ['全部','已送單','處理中','已完成'], theme: 'energyblue', selectedIndex: 0 });
+	                    	checkStatus = tool.jqxDropDownList('getSelectedItem').value;
+	                    	tool.bind('select', function (event) {
+	                    		if(event.args){
+	                    			checkStatus = event.args.item.value;
+	                    		}
+	                    	});
+                            break;
+	                    case 2:
+	                        tool.jqxButton({ width: 80, height: 30, theme: 'ctssBlue'});
+	                        tool.text("查詢");
+	                        tool.on("click", function () {
+	                            if(!checkStatus) {     
+	                                popupWin("提醒", "請選擇狀態！");
+	                            } else {
+	                            	setGrid();
+	                            }
+	                        });
+	                        break;
+	                    }
+	                }
+	            });
+	            
+	            $("#btnConfirm").click(function () {
+                    $("#popWindow").jqxWindow('close');
+                });
+	            
+				$('#minifyMenu').click(function (){
+					 window.setTimeout(function(){
+						 var gridConfig = { "width" : $("#jqxWidget").width() };
+						 $("#jqxgrid").jqxGrid(gridConfig);
+					 },0);
+	            });
+
+	            
+	            $("#userPlace").change(function () {
+	                $("#userPlaceId").val($("#userPlace option:selected").val());
+	            });
+	        });    // End Of $(document).ready(function ()
+	        		
+			function setGrid(){
+	        	
+				var data ={
+                       "placeId": $("#userPlace").val(),
+                       "checkStatus": checkStatus
+                };
+				
+                if( checkStatus == "全部" ){
+                	data.checkStatus = '' ;
+                }
+              	
+				$.ajax({
+				     url: '../api/admin/checkResultFollow/queryResultFollowList',
+				     data: data,
+				     type: 'post',
+				     dataType: 'json',
+				     async: false,
+				     success: function(data) {
+				  	   if( data.msg.length > 0 ){
+				  		   popupWin("執行結果", data.msg);
+				  	   }else{
+				  		   $("#jqxgrid").jqxGrid('clear');
+				  		   if( data.resultList.length != 0 ){
+				  			 	gridSource.localdata = data.resultList ;
+		  						$("#jqxgrid").jqxGrid('updatebounddata', 'cells'); 
+				  		   }
+				  	   }
+					}
+				});
+				
+	        }
+	        
+            function parseDateToString(dateString) {
+                var dateArray = dateString.split(',');
+                var year = dateArray[0];
+                var month = dateArray[1].length < 2 ? '0' + dateArray[1] : dateArray[1];
+                var day = dateArray[2].length < 2 ? '0' + dateArray[2] : dateArray[2];
+                var hour = dateArray[3].length < 2 ? '0' + dateArray[3] : dateArray[3];
+                var min = dateArray[4].length < 2 ? '0' + dateArray[4] : dateArray[4];
+                var sec = dateArray[5].length < 2 ? '0' + dateArray[5] : dateArray[5];
+                var resultDateStr = year + '-' + month + '-' + day + ' ' + hour + ':' + min + ':' + sec;
+                return resultDateStr;
+            }
+            
+            function popupWin(header, content) {
+                $("#msgHeader").empty().append("<span>" + header + "</span>");
+                $("#msg").empty().append("<span>" + content + "</span>");
+                $("#popWindow").jqxWindow('open');
+            }
+            
+			function initRecordData() {
+                
+                gridSource =
+                {
+                    dataType: "json",
+                    localdata: [],
+                    datafields:
+                    [
+                    	{ name: 'fcrId', type: 'int'},
+                    	{ name: 'placeType', type: 'string' },
+                    	{ name: 'place', type: 'string' },
+                        { name: 'checkId', type: 'string' },
+                        { name: 'deviceType', type: 'string' },
+                        { name: 'checkContent', type: 'string' },
+                        { name: 'checkSymbol', type: 'string' },
+                        { name: 'checkResult', type: 'string'},
+                        { name: 'checkDateYYYYMMDD', type: 'string' },
+                        { name: 'checkStatus', type: 'string' },
+                        { name: 'ctNote', type: 'string' },
+                    	{ name: 'manager', type: 'string' },
+                    	{ name: 'examiner1', type: 'string' },
+                    	{ name: 'examiner2', type: 'string' },
+                    	{ name: 'checkDate', type: 'date'}
+                    ],
+                    id: 'fcrId'
+                };
+                
+                var dataAdapter = new $.jqx.dataAdapter(gridSource);
+                               
+                $("#jqxgrid").jqxGrid({
+                	 width:	$("#jqxWidget").width(),
+                     width: "100%" ,
+                	 height: "90%" ,
+                     source: dataAdapter,
+                     showfilterrow: true,
+                     filterable: true,
+                     columnsresize: true,
+                     theme: 'energyblue',
+                     columns: [
+                         {
+                             text: 'No.', sortable: false, filterable: false, editable: false,
+                             groupable: false, draggable: false, resizable: false,
+                             datafield: '', columntype: 'number', width: '3%', minwidth: 50,
+                             cellsrenderer: function (row, column, value) {
+                                 return "<div style='margin:4px;'>" + (value + 1) + "</div>";
+                             }
+                         },
+                         { text: '場所分類', columntype: 'textbox', editable: false, minwidth: 90, filtertype: 'input', datafield: 'placeType', width: '6%' },
+                         { text: '單位名稱', columntype: 'textbox', editable: false, minwidth: 90, filtertype: 'input', datafield: 'place', width: '6%' },
+                         { text: '檢查項識別碼', columntype: 'textbox', editable: false, minwidth: 120, filtertype: 'input', datafield: 'checkId', width: '9%' },
+                         { text: '類別設備內容', columntype: 'textbox', editable: false, minwidth: 120, filtertype: 'input', datafield: 'deviceType', width: '9%' },
+                         { text: '檢查重點實施內容', columntype: 'textbox', editable: false, minwidth: 200, filtertype: 'input', datafield: 'checkContent', width: '15%' },
+                         { text: '符號', columntype: 'textbox', editable: false, minwidth: 50, filtertype: 'list', filteritems: symbolItem, datafield: 'checkSymbol', width: '3%', cellsalign: 'center' },
+                         { text: '檢查狀況處置情形', columntype: 'textbox', editable: false, minwidth: 200, filtertype: 'input', datafield: 'checkResult', width: '15%'},
+                         //{ text: '檢查日期', columntype: 'textbox', editable: false, minwidth: 120, filtertype: 'range', cellsformat: 'yyyy-MM-dd', datafield: 'checkDate', width: '9%' },
+                         { text: '檢查日期', columntype: 'textbox', editable: false, minwidth: 120, filtertype: 'input', datafield: 'checkDateYYYYMMDD', width: '10%' },
+                         { text: '狀態', columntype: 'textbox', editable: false, minwidth: 90, filtertype: 'list', filteritems: statusItem, datafield: 'checkStatus', width: '6%' },
+                         { text: '本山備註', columntype: 'textbox', editable: false, minwidth: 200, filtertype: 'input', datafield: 'ctNote', width: '15%' },
+                         { text: '負責人', columntype: 'textbox', editable: false, minwidth: 90, filtertype: 'input', datafield: 'manager', width: '6%' },
+                         { text: '檢查者1', columntype: 'textbox', editable: false, minwidth: 90, filtertype: 'input', datafield: 'examiner1', width: '6%' },
+                         { text: '檢查者2', columntype: 'textbox', editable: false, minwidth: 90, filtertype: 'input', datafield: 'examiner2', width: '6%' }
+                     ]
+                 });
+                
+                var  localizationobj = {};
+                localizationobj.filterchoosestring= "全部";
+                $("#jqxgrid").jqxGrid('localizestrings', localizationobj);
+            }
+	        
+	        function getLinkUrl(functionItems) {
+	            var url = "../admin/" + functionItems + "?userPlaceId=" + $("#userPlaceId").val();
+	            window.location.href = url;
+	        }
+	        
+	    </script>
+	</head>
+	
+	<body class="">
+		<!-- HEADER -->
+		<header id="header">
+			<div id="logo-group">
+
+				<span id="logo" style="width: 0;"></span>
+            <h5 class="txt-color-white">   <b>中台禪寺</b> 消防安檢登錄系統</h5>
+
+			</div>
+
+
+			<!-- pulled right: nav area -->
+			<div class="pull-right">
+				
+				<!-- logout button -->
+				<div id="logout" class="btn-header transparent pull-right">
+				
+					<h6 class="txt-color-white">管理者 &nbsp;&nbsp;<th:block th:text="${UserName}"></th:block>&nbsp;&nbsp;<th:block th:text="${UserId}"></th:block>&nbsp;&nbsp;IP:<th:block th:text="${UserIp}"></th:block> 
+                    <span > <a class="btn btn-default btn-sm " href="logout">登出</a> </span>
+					</h6>
+
+				</div>
+				<!-- end logout button -->
+
+			</div>
+			<!-- end pulled right: nav area -->
+
+		</header>
+		<!-- END HEADER -->
+
+		<!-- Left panel : Navigation area -->
+		<!-- Note: This width of the aside area can be adjusted through LESS variables -->
+		<aside id="left-panel">
+            <nav>
+                <select id="userPlace" name="userPlace">
+                    <th:block th:each="upmi:${upmis}">
+                        <option th:text="${upmi.place}" th:value="${upmi.getPlaceId()}" th:selected="${upId==upmi.getPlaceId()}"></option>
+                    </th:block>
+                </select>
+                <input type="hidden" id="userPlaceId" name="userPlaceId" th:value="${upId}" />
+            </nav>
+            <nav th:switch="${UserType}">
+                <ul th:case="'admin'">
+                    <li>
+                        <a href="#" onclick="javascript:getLinkUrl('index')"><i class="fa fa-lg fa-fw fa-home txt-color-pink"></i> <span class="menu-item-parent">主頁面</span></a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="javascript:getLinkUrl('fireCheck')"><i class="fa fa-lg fa-fw fa-bar-chart-o txt-color-pink"></i> <span class="menu-item-parent">安檢登錄 / 調閱</span></a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="javascript:getLinkUrl('announceMsg')"><i class="fa fa-lg fa-fw fa-newspaper-o txt-color-pink"></i> <span class="menu-item-parent">公告訊息</span></a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="javascript:getLinkUrl('checkStatusMark')"><i class="fa fa-lg fa-fw fa-question txt-color-pink"></i> <span class="menu-item-parent">問題項狀態處理</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-lg fa-fw fa-print txt-color-pink"></i> <span class="menu-item-parent">檢查總表</span></a>
+                        <ul>
+                            <li>
+                                <a href="#" onclick="javascript:getLinkUrl('checkSummary')"><i class="fa fa-arrow-circle-right"></i> <span class="menu-item-parent">總表</span></a>
+                                <a href="#" onclick="javascript:getLinkUrl('checkResultFollow')"><i class="fa fa-arrow-circle-right"></i> <span class="menu-item-parent">進度追蹤</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-lg fa-fw fa-cog txt-color-pink"></i> <span class="menu-item-parent">管理設定</span></a>
+                        <ul>
+                            <li>
+                                <a href="#" onclick="javascript:getLinkUrl('userPlaceMapping')"><i class="fa fa-arrow-circle-right"></i> <span class="menu-item-parent">場所人員對應表</span></a>
+                                <a href="#" onclick="javascript:getLinkUrl('announceSet')"><i class="fa fa-arrow-circle-right"></i> <span class="menu-item-parent">公告訊息設定</span></a>
+                                <a href="#" onclick="javascript:getLinkUrl('onlineUsers')"><i class="fa fa-arrow-circle-right"></i> <span class="menu-item-parent">線上使用者查詢</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul th:case="'user'">
+                    <li>
+                        <a href="#" onclick="javascript:getLinkUrl('index')"><i class="fa fa-lg fa-fw fa-home txt-color-pink"></i> <span class="menu-item-parent">主頁面</span></a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="javascript:getLinkUrl('fireCheck')"><i class="fa fa-lg fa-fw fa-bar-chart-o txt-color-pink"></i> <span class="menu-item-parent">安檢登錄 / 調閱</span></a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="javascript:getLinkUrl('announceMsg')"><i class="fa fa-lg fa-fw fa-newspaper-o txt-color-pink"></i> <span class="menu-item-parent">公告訊息</span></a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="javascript:getLinkUrl('checkStatusMark')"><i class="fa fa-lg fa-fw fa-question txt-color-pink"></i> <span class="menu-item-parent">問題項狀態處理</span></a>
+                    </li>
+                 </ul>
+            </nav>
+            <span class="minifyme" data-action="minifyMenu"> 
+                <i class="fa fa-arrow-circle-left hit"></i> 
+            </span>
+        </aside>
+		<!-- END NAVIGATION -->
+
+		<!-- MAIN PANEL -->		
+		<div id="main" role="main">
+            <!-- MAIN CONTENT -->
+            <div id="content" style="height: 100%;">
+                <!-- widget grid -->
+                <section id="widget-grid" style="height: 100%;">
+                    <!-- row -->
+                    <div class="row" style="height: 100%;">
+                        <!-- NEW WIDGET START -->
+                        <article style="height: 100%;">
+                            <!-- Widget ID (each widget will need unique ID)-->
+                            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false" style="height: 100%;">
+                                <header>
+                                    <span class="fa fa-arrow-circle-right" style="margin-left: 5px; vertical-align:middle;"> 進度追蹤 </span>
+                                </header>
+                                <div>
+					               <div id="jqxToolBar" style="height: 5%; display:inline-flex; align-items:center; justify-content:flex-start;"></div>
+					            </div>
+					            <div id='jqxWidget' style="font-size: 13px; font-family: Verdana; float: left; width: 100%; height: 95%; background-color: white;">
+					                <div id="jqxgrid"></div>
+					            </div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+            </div>
+            <br/><br/>
+        </div>
+		<!-- END MAIN PANEL -->
+		<div id='popWindow' style="font-size: 13px; font-family: Verdana; float: left; width: 120px;">
+            <div id="msgHeader"></div>
+            <div id="msgContent" style="margin: 10px">
+                <div id="msg"></div><br/><br/>
+                <div style="float: right;">
+                    <input type="button" value="確認" style="margin-bottom: 5px;" id="btnConfirm" /><br />
+                </div>
+            </div>
+        </div>
+
+        <!-- IMPORTANT: APP CONFIG -->
+        <script src="js/app.config.js"></script>
+
+        <!-- MAIN APP JS FILE -->
+        <script src="js/app.min.js"></script>
+	</body>
+</html>

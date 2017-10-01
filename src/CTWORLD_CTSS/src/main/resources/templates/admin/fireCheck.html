@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="en-us" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta content="text/html;charset=UTF-8">
+		<title>中台禪寺消防安檢登錄系統- 安檢登錄/調閱 </title>
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<!-- Basic Styles -->
+		<link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome.min.css">
+
+		<!-- SmartAdmin Styles : Caution! DO NOT change the order -->
+		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production-plugins.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-skins.min.css">
+
+		<!-- SmartAdmin RTL Support -->
+		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.min.css"> 
+
+		<!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
+		<link rel="stylesheet" type="text/css" media="screen" href="css/demo.min.css">
+
+		<!-- FAVICONS -->
+		<link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
+
+		<!-- GOOGLE FONT -->
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+
+		<!-- Specifying a Webpage Icon for Web Clip 
+			 Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
+		<link rel="apple-touch-icon" href="img/splash/sptouch-icon-iphone.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="img/splash/touch-icon-ipad.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="img/splash/touch-icon-iphone-retina.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="img/splash/touch-icon-ipad-retina.png">
+		
+		<!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		
+		<!-- Startup image for web apps -->
+		<link rel="apple-touch-startup-image" href="img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+		<link rel="apple-touch-startup-image" href="img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+		<link rel="apple-touch-startup-image" href="img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+	
+        <!-- import jQWidgets js -->	
+        <link type="text/css" rel="Stylesheet" th:href="@{js/jqwidgets/styles/jqx.base.css}" />
+        <link type="text/css" rel="Stylesheet" th:href="@{js/jqwidgets/styles/jqx.energyblue.css}" />
+        <link type="text/css" rel="Stylesheet" th:href="@{css/ctssGreen.css}" />
+        <link type="text/css" rel="Stylesheet" th:href="@{css/ctssBlue.css}" />
+        <script type="text/javascript" th:src="@{js/libs/jquery-2.1.1.min.js}"></script>
+        <script type="text/javascript" th:src="@{js/libs/jquery-ui-1.10.3.min.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxcore.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxdata.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxbuttons.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxscrollbar.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxlistbox.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxdropdownlist.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxmenu.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxcombobox.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxinput.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxtoolbar.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxgrid.js}"></script>
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxgrid.sort.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxgrid.pager.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxgrid.selection.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxgrid.edit.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxgrid.filter.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxgrid.columnsresize.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxdatetimeinput.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxcalendar.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxtooltip.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/globalization/globalize.js}"></script> 
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxwindow.js}"></script>  
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxdata.export.js}"></script>  
+        <script type="text/javascript" th:src="@{js/jqwidgets/jqxgrid.export.js}"></script> 
+        
+	    <style type="text/css">
+            body, html, #main {
+                min-height: 100% !important;
+                height: 100%;
+                overflow: hidden;
+            }
+            .editedRow {
+                color: #b90f0f !important;
+                font-style: italic;
+            }
+            #userPlace {
+	           width: 100%;
+            }
+            html {
+				font-size: 100%;
+			}
+			h5 {
+				font-size: 1.5rem;
+				position:absolute;
+			}
+            aside {
+                background: #dfe2ed;
+            }
+			aside nav {
+				font-size:1rem;
+			}
+			aside nav span {
+				font-size:1rem;
+			}
+			.jqx-widget, .jqx-widget-header, .jqx-widget-content, input[type=text].jqx-input, div, span, label, td {
+				font-size: 16px;
+			}
+			.jqx-toolbar {
+                background-color: #FFFFFF !important;
+            }
+            .jqx-button-ctssGreen {
+                color:#FFFFFF;
+                text-shadow:none;
+                border-color:#59AD5B;
+                background-color:#59AD5B;
+                background-image:-moz-linear-gradient(top,#59AD5B,#59AD5B);
+                background-image:-ms-linear-gradient(top,#59AD5B,#59AD5B);
+                background-image:-o-linear-gradient(top,#59AD5B,#59AD5B);
+                background-image:-webkit-gradient(linear,center top,center bottom,from(#59AD5B),to(#59AD5B));
+                background-image:-webkit-linear-gradient(top,#59AD5B,#59AD5B);
+                background-image:linear-gradient(top,#59AD5B,#59AD5B);
+                background-image:linear-gradient(to bottom,#59AD5B,#59AD5B);
+                -moz-background-clip:padding;
+                background-clip:padding-box;
+                -webkit-background-clip:padding-box;
+                font-family:Verdana;
+            }
+        </style>
+	    
+	    <script type="text/javascript">	  
+	        var checkTypeData = new Array();
+	        var editedRows = new Array();
+            var checkYearArray = new Array();
+	        var checkDateOri = "";
+	        var managerSignName = "";
+            var recordPreRowIndex;
+	        /*<![CDATA[*/
+	        var userType = '[[${UserType}]]';
+	        /*]]>*/
+            var statusItem = ['已送單','處理中','已完成'];
+	        var symbolItem = ['O','V','X'];
+	        var gridSourceNew;
+	        var recordDataNew = {};
+	        
+		    $(document).ready(function () {
+                initGridData(); 
+                
+		        $("#userPlace").change(function(){
+		            $('#jqxToolBar').jqxToolBar('refresh'); 
+                    $('#jqxgrid').jqxGrid('clear');
+		        });
+		        
+		        var ddlCheckType, ddlCheckTypeMin, txtCheckFrequenceMonthly, txtCheckFrequenceMonthlyMin;
+		        var ddlYear, ddlYearMin, ddlMonth, ddlMonthMin, ddlTimes, ddlTimesMin;
+		        var cmbDate, cmbDateMin, txtMgrSign, txtMgrSignMin;
+		        $("#jqxwindow").jqxWindow({ minHeight: 150, width: 500, theme: 'energyblue', isModal: true, autoOpen: false });
+                $("#jqxwindowExport1").jqxWindow({ minHeight: 200, width: '100%', maxWidth: 1024, theme: 'energyblue', isModal: true, autoOpen: false, showCloseButton: true });
+                
+                
+                gridSourceNew =
+                {
+                    dataType: "json",
+                    localdata: recordDataNew,
+                    datafields:
+                    [
+                        { name: 'checkId', type: 'string' },
+                        { name: 'deviceType', type: 'string' },
+                        { name: 'checkContent', type: 'string' },
+                        { name: 'checkSymbol', type: 'string' },
+                        { name: 'checkResult', type: 'string'},
+                        { name: 'checkStatus', type: 'string' },
+                        { name: 'updateDtYYYYMMDDHHMMSS', type: 'string' },
+                        { name: 'updateDt', type:'date' }
+                    ],
+                    id: 'checkId',
+                    updaterow: function (rowid, rowdata, commit) {
+                        var rowindex = $("#jqxgrid").jqxGrid('getrowboundindexbyid', rowid);          
+                        editedRows.push(rowdata);
+                        commit(true);
+                    } 
+                };
+                
+	            $("#jqxToolBar").jqxToolBar({
+	                width: '100%', height: 60, minimizeWidth: 300, theme: 'energyblue', tools: 'custom dropdownlist custom input | custom dropdownlist custom dropdownlist custom dropdownlist | custom custom | toggleButton | custom input | toggleButton | toggleButton',
+	                initTools: function (type, index, tool, menuToolIninitialization) {
+	                    switch (index) {
+	                    case 0:	                        
+	                        tool.text("記錄別");
+	                        return { menuTool: false };
+	                        break;
+	                    case 1:
+	                        var cfmValue = $.jqx.cookie.cookie("jqxInput_checkFrequenceMonthly");
+                            if (undefined == cfmValue) cfmValue = 0;
+                            tool.jqxDropDownList({ width: 125, height: 30, source: getCheckTypeList(), theme: 'energyblue', selectedIndex: 0 });
+                            if (menuToolIninitialization === false) {
+                                ddlCheckType = tool;
+                            } else {
+                                ddlCheckTypeMin = tool;
+                            }
+                            tool.on("change", function (event) {
+                                $('#jqxgrid').jqxGrid('clear');
+                                var args = event.args;
+                                if (args) {
+                                    var label = args.item.label;
+                                    var cfMonthlysource = getCheckFrequenceMonthly(label);
+                                    txtCheckFrequenceMonthly.jqxInput({ source: cfMonthlysource, placeHolder: cfMonthlysource });
+                                    var yearSource = getCheckYearList($("#userPlace").val(), ddlCheckType.val());
+                                    ddlYear.jqxDropDownList({source: yearSource, selectedIndex: getCurrentYearIndex(yearSource) });
+                                    var monthSource = getCheckMonthList(ddlYear.val(), $("#userPlace").val(), ddlCheckType.val());
+                                    ddlMonth.jqxDropDownList({source: monthSource, selectedIndex: 0});
+                                    var checkTimesSource = getCheckTimes(cfMonthlysource, ddlYear.val(), ddlMonth.val(), $("#userPlace").val(), ddlCheckType.val())
+                                    ddlTimes.jqxDropDownList({source: checkTimesSource, selectedIndex: 0});
+                                    $.jqx.cookie.cookie("jqxInput_checkFrequenceMonthly", cfMonthlysource);
+                                }
+                            });
+                            return { minimizable: false };
+
+                            break;    
+	                    case 2:
+	                        tool.text("月安檢頻率");
+                            return { menuTool: false };
+	                        break;
+	                    case 3:
+                            tool.jqxInput({ width: 20, height: 32, theme: 'energyblue', placeHolder: getCheckFrequenceMonthly(ddlCheckType.val()), disabled: true});
+                            if (menuToolIninitialization === false) {
+                                txtCheckFrequenceMonthly = tool;
+                            } else {
+                                txtCheckFrequenceMonthlyMin = tool;
+                            }
+                            return { minimizable: false };
+                            break;
+	                    case 4:
+	                        tool.text("年");
+                            return { menuTool: false };
+	                        break;
+	                    case 5:
+                            tool.jqxDropDownList({ width: 70, height: 30, theme: 'energyblue', source: getCheckYearList($("#userPlace").val(), ddlCheckType.val()), selectedIndex: getCurrentYearIndex(checkYearArray) });
+                            if (menuToolIninitialization === false) {
+                                ddlYear = tool;
+                            } else {
+                                ddlYearMin = tool;
+                            }
+                            tool.on("change", function (event) {
+                                var args = event.args;
+                                if (args) {
+                                    var label = args.item.label;
+                                    getCheckMonthList(label, $("#userPlace").val(), ddlCheckType.val());
+                                    var source = getCheckTimes($.jqx.cookie.cookie("jqxInput_checkFrequenceMonthly"), label, ddlMonth.val(), $("#userPlace").val(), ddlCheckType.val());
+                                    ddlTimes.jqxDropDownList({source: source, selectedIndex: 0});
+                                }
+                            });
+                            return { minimizable: false };
+	                        break;
+	                    case 6:
+	                        tool.text("月");
+                            return { menuTool: false };
+	                        break;
+	                    case 7:
+                            tool.jqxDropDownList({ width: 50, height: 30, theme: 'energyblue', source: getCheckMonthList(ddlYear.val(), $("#userPlace").val(), ddlCheckType.val()), selectedIndex: 0 });
+                            if (menuToolIninitialization === false) {
+                                ddlMonth = tool;
+                            } else {
+                                ddlMonthMin = tool;
+                            }
+                            tool.on("change", function (event) {
+                                var args = event.args;
+                                if (args) {
+                                    var label = args.item.label;
+                                    var source = getCheckTimes($.jqx.cookie.cookie("jqxInput_checkFrequenceMonthly"), ddlYear.val(), label, $("#userPlace").val(), ddlCheckType.val());
+                                    ddlTimes.jqxDropDownList({source: source, selectedIndex: 0});
+                                }
+                            });
+                            return { minimizable: false };
+                            break;    
+                        case 8:
+                            tool.text("當月次數");
+                            return { menuTool: false };
+                            break;
+	                    case 9:
+                            tool.jqxDropDownList({ width: 50, height: 30, autoDropDownHeight: false, theme: 'energyblue', source: getCheckTimes($.jqx.cookie.cookie("jqxInput_checkFrequenceMonthly"), ddlYear.val(), ddlMonth.val(), $("#userPlace").val(), ddlCheckType.val()), selectedIndex: 0 });
+                            if (menuToolIninitialization === false) {
+                                ddlTimes = tool;
+                            } else {
+                                ddlTimesMin = tool;
+                            }
+                            tool.on("change", function(event) {
+                                var args = event.args;
+                                if(args) {
+                                    var label = args.item.label;
+                                    var checkDate = getCheckDate(ddlYear.val(), ddlMonth.val(), $("#userPlace").val(), ddlCheckType.val(), label);
+                                    cmbDate.jqxDateTimeInput('setDate', new Date(checkDate));
+                                    if(userType != "admin") {
+                                        $("#jqxToolBar").jqxToolBar("getTools")[14].tool.val("");
+                                    }
+                                    $('#jqxgrid').jqxGrid('clear');
+                                }
+                            });
+                            return { minimizable: false };
+                            break;    
+                        case 10:
+                            tool.text("檢查日期");
+                            return { menuTool: false };
+                            break;       
+	                    case 11:
+	                        tool.jqxDateTimeInput({ width: '125px', height: '30px', formatString: 'yyyy-MM-dd', theme: 'energyblue', value: null });
+	                        if (menuToolIninitialization === false) {
+	                            cmbDate = tool;
+                            } else {
+                                cmbDateMin = tool;
+                            }
+                            return { minimizable: false };
+	                        break;
+	                    case 12:                        
+                            tool.jqxButton({ width: 85, height: 32, theme: 'ctssGreen' });                        
+                            if(userType=="admin") {
+                                tool.jqxButton({ width: 50});
+                                tool.text("調閱");
+                            } else {
+                                tool.text("確認新增");
+                            }
+	                        tool.on("click", function () { 
+	                            if(userType != "admin") {
+	                                $("#jqxToolBar").jqxToolBar("getTools")[14].tool.val("");
+	                            }
+                                $("#jqxgrid").jqxGrid('clear');
+	                            if(!cmbDate.val()) {     
+	                                popupWin("提醒", "請選擇檢查日期！");
+	                            } else { 
+	                                if(checkDateOri == "") {
+	                                    createNewRecord(ddlYear.val(), ddlMonth.val(), $("#userPlace").val(), ddlCheckType.val(), ddlTimes.val(), cmbDate.val());
+	                                } else {
+	                                    getCheckRecordByCheckDate(ddlYear.val(), ddlMonth.val(), $("#userPlace").val(), ddlCheckType.val(), ddlTimes.val(), cmbDate.val());	        
+	                                    if(userType != "admin") {
+	                                        $("#jqxToolBar").jqxToolBar("getTools")[14].tool.val(managerSignName);
+	                                    }
+	                                }
+	                            }
+	                           
+	                        });
+                            return { minimizable: false };
+	                        break;     
+                        case 13:
+                            tool.text("單位主管簽章");
+                            return { menuTool: false };
+                            break;  
+	                    case 14:
+                            tool.jqxInput({ width: 65, height: 30, theme: 'energyblue', placeHolder: managerSignName });
+                            tool.jqxTooltip({ position: 'top', content: '主管簽章' });
+                            txtMgrSign = tool;
+                            return { minimizable: false };
+                            
+                            break;   
+                        case 15:                        
+                            tool.jqxButton({ width: 50, height: 32, theme: 'ctssBlue'});
+                            tool.text("存檔");
+                            tool.on("click", function () {
+                                if($("#jqxToolBar").jqxToolBar("getTools")[14].tool.val() == "") {
+                                    popupWin("提醒", "請填寫單位主管簽章！")
+                                    
+                                } else {
+                                    var errorMsg = checkDataBeforeSave();
+                                    if(errorMsg != "") {
+                                        popupWin("提醒", errorMsg);
+                                        
+                                    } else {
+                                    
+		                                var data ={
+		                                        "checkYear": ddlYear.val(), 
+		                                        "checkMonth": ddlMonth.val(),
+		                                        "placeId": $("#userPlace").val(),
+		                                        "checkType": ddlCheckType.val(), 
+		                                        "checkTimesMark": parseInt(ddlTimes.val()),
+		                                        "checkDate" : cmbDate.val(),
+		                                        "managerSign" : $("#jqxToolBar").jqxToolBar("getTools")[14].tool.val(),
+		                                        "recordDatas" : JSON.stringify(editedRows)
+		                                    };
+		                                $.ajax({
+		                                    url: '../api/admin/fireCheck/saveAndCreateNewRecord',
+	                                        data: data,
+	                                        type: 'post',
+	                                        dataType: 'json',
+	                                        async: false,
+	                                        success: function(data) {
+	                                            popupWin("執行結果", data.msg);
+                                                $("#jqxgrid").jqxGrid('refresh');
+	                                            // Reload Data
+                                                queryRecordData(data.resultList);
+	                                            $("#jqxgrid").jqxGrid('updatebounddata', 'cells');
+	                                        },
+	                                        error: function(data) {  
+	                                            popupWin("執行發生錯誤", "請洽系統管理員!");
+	                                        } 
+		                                });
+                                    }
+                                }  
+                            });
+                            return { minimizable: false };
+                            break;    
+                        case 16:       
+                            tool.jqxButton({ width: 85, height: 32, theme: 'ctssBlue' });                     
+                            tool.text("匯出/列印");
+                            tool.on("click", function () {
+                                $('#export1Title1').empty();
+                                $('#export1Title2').empty();
+                                $('#export1Title3').empty();
+                                $("#jqxwindowExport1").jqxWindow({ minHeight: 200, width: '100%', maxWidth: 1024, theme: 'energyblue', isModal: true, autoOpen: false, resizable: true, showCloseButton: true });
+                                if(ddlCheckType.val() == "防火避難設施"){
+                                    getExportData1(ddlYear.val(), ddlMonth.val(), $("#userPlace").val(), ddlCheckType.val(), ddlTimes.val(), cmbDate.val()); 
+                                } else if(ddlCheckType.val() == "消防安全設備" || ddlCheckType.val() == "電器安全"){
+                                    getExportData2(ddlYear.val(), ddlMonth.val(), $("#userPlace").val(), ddlCheckType.val(), ddlTimes.val(), cmbDate.val()); 
+                                } else {
+                                    getExportData4(ddlYear.val(), ddlMonth.val(), $("#userPlace").val(), ddlCheckType.val()); 
+                                }
+                                
+                            });
+//                             return { minimizable: false };
+                            break;  
+	                    }
+	                }
+	            });	
+	            if(userType=="admin") {
+	                $('#jqxToolBar').jqxToolBar('destroyTool', 15);
+                    $('#jqxToolBar').jqxToolBar('destroyTool', 14);
+                    $('#jqxToolBar').jqxToolBar('destroyTool', 13);
+	            }
+	            
+	            function getCheckRecordByCheckDate(checkYear, checkMonth, placeId, checkType, checkTimesMark, checkDate) {
+	                    var resultData;
+	                    $.ajax({
+	                        url: '../api/admin/fireCheck/checkRecord',
+	                        data: {
+	                            "checkYear": checkYear, 
+	                            "checkMonth": checkMonth,
+	                            "placeId": placeId,
+	                            "checkType": checkType, 
+	                            "checkTimesMark": parseInt(checkTimesMark),
+	                            "checkDate": checkDate
+	                        },
+	                        type: 'post',
+	                        dataType: 'json',
+	                        async: false,
+	                        success: function(data) {
+	                            if(data != null) {
+	                                managerSignName = data[0].managerSign;
+	                            } else {
+	                                managerSignName = "";
+	                            }
+                                queryRecordData(data);
+	                        }
+	                    });
+	            }
+	            
+	            $("#btnConfirm").jqxButton({ theme: 'ctssBlue' });
+	            
+	            $("#btnConfirm").click(function () {
+                    $("#jqxwindow").jqxWindow('close');
+                });
+	            ddlYear.val(), ddlMonth.val(), $("#userPlace").val(), ddlCheckType.val(), ddlTimes.val(), cmbDate.val()
+	            
+	            $("#btnExport1").jqxButton({ width: 80, height: 30 , theme: 'ctssBlue'});
+	            
+	            $("#btnExport1").on('click', function (){
+	                var data = {
+	                        "checkYear": ddlYear.val(), 
+	                        "checkMonth": ddlMonth.val(),
+	                        "placeId": $("#userPlace option:selected").val(),
+	                        "place": $("#userPlace option:selected").text(),
+	                        "checkType": ddlCheckType.val(), 
+	                        "checkTimesMark": parseInt(ddlTimes.val()),
+	                        "managerSign": txtMgrSign.val()};
+//                     console.log("JSON.stringify(data)="+JSON.stringify(data));
+                   
+                    window.location = "../admin/fireCheck/exportExcel?checkYear="+ddlYear.val()+"&checkMonth="+ddlMonth.val()+"&placeId="+$("#userPlace option:selected").val()+"&place="+$("#userPlace option:selected").text()+"&checkType="+ddlCheckType.val()+"&checkTimesMark="+parseInt(ddlTimes.val())+"&managerSign="+txtMgrSign.val();
+	                $.ajax({
+                        url: '../admin/fireCheck/exportExcel',
+                        data: data,
+	                    type: 'get',
+	                    dataType: 'json',
+	                    contentType: 'application/json;charset=UTF-8',
+	                    success: function(data) {
+// 	                        console.log("Export Excel Success!!");
+	                    }
+	                });
+
+	            });
+	            
+	            $("#userPlace").change(function () {
+	                $("#userPlaceId").val($("#userPlace option:selected").val());
+	            });
+	            
+
+                $("#jqxgrid").on('cellclick', function (event) {
+                    var column = $("#jqxgrid").jqxGrid('getcolumn', event.args.datafield);
+                    var value = $("#jqxgrid").jqxGrid('getcellvalue', event.args.rowindex, column.datafield);
+                    
+                    if(column.text == "符號") {
+                        if(value == null || value == "") {
+                            $("#jqxgrid").jqxGrid('setcellvalue', event.args.rowindex, "checkSymbol", "O");
+                        }
+                    } else if(column.text == "狀態") {
+                        if(value == null || value == "") {
+                            $("#jqxgrid").jqxGrid('setcellvalue', event.args.rowindex, "checkStatus", "已送單");
+                        }
+                    }
+                    
+                });    
+	            
+	        });    // End Of $(document).ready(function ()
+		    
+	                
+	                
+		    // 取得記錄別資料清單
+            function getCheckTypeList() {
+                var result = null;
+                var checkTypeArray = [];
+                $.ajax({
+                    url: '../api/admin/fireCheck/checkTypeList/'+$("#userPlace option:selected").val(),
+                    type: 'post',
+                    dataType: 'json',
+                    async: false,
+                    success: function(data) {
+                        data.forEach(function(obj) {
+                            checkTypeArray.push(obj);
+                        });
+                        checkTypeArray.splice(0, 0, "");
+                        result = checkTypeArray;
+                    }
+                 });
+                 return result;
+            }
+            
+            // 依據記錄別取得月安檢頻率
+            function getCheckFrequenceMonthly(checkType) {
+                var result = 0;
+                if(typeof checkType != 'undefined' && checkType) {
+	                $.ajax({
+	                    url: '../api/admin/fireCheck/checkFrequenceMonthly/'+checkType,
+	                    type: 'post',
+	                    dataType: 'json',
+	                    async: false,
+	                    success: function(data) {
+	                        result = data;
+	                    }
+	                 });
+                }
+                return result;
+            }
+            
+            // 取得檢查年與本年度與下一年度西元年
+            function getCheckYearList(placeId, checkType) {
+                var result = null;
+                
+                if(checkType != "") {
+                    checkYearArray = [""];
+	                $.ajax({
+	                    url: '../api/admin/fireCheck/checkYearList',
+	                    data: {
+	                        "placeId": placeId,
+	                        "checkType": checkType, 
+	                    },
+	                    type: 'post',
+	                    dataType: 'json',
+	                    async: false,
+	                    success: function(data) {
+	                        data.forEach(function(obj) {
+	                            checkYearArray.push(obj);
+	                        });
+	                        result = checkYearArray;
+	                    }
+	                 });
+                } else {
+                    checkYearArray = [""];
+                    result = checkYearArray;
+                }
+                return result;
+            }
+            
+            function getCurrentYearIndex(checkYearArray) {
+                var currentYearIndex = 0;
+                if(checkYearArray != null) {
+	                var currentDate = new Date();
+	                var currentYear = currentDate.getFullYear();
+	                checkYearArray.forEach(function (item, index) {
+	                    if(item == currentYear) {
+	                        currentYearIndex = index;
+	                    }
+	                });
+                }
+                return currentYearIndex;
+            }
+            
+            // 依檢查年取出檢查月
+            function getCheckMonthList(checkYear, placeId, checkType) {
+                var result = null;
+                
+                var checkMonthArray = [];
+                if(checkType != "" && checkYear != "") {
+	                $.ajax({
+	                    url: '../api/admin/fireCheck/checkMonthList',
+	                    data: {
+	                        "checkYear": checkYear, 
+	                        "placeId": placeId,
+	                        "checkType": checkType, 
+	                    },
+	                    type: 'post',
+	                    dataType: 'json',
+	                    async: false,
+	                    success: function(data) {
+	                        data.forEach(function(obj) {
+	                            checkMonthArray.push(obj);
+	                        });
+	                        result = checkMonthArray;
+	                    }
+	                 });
+                } else {
+                    checkMonthArray = [""];
+                    result = checkMonthArray;
+                }
+                 return result;
+            }
+            
+            // 依據月安檢頻率與年月取得當月次數清單
+            function getCheckTimes(frequence, year, month, placeId, checkType) {
+                var day = 1;
+                var timesArray = [];
+                
+                if(year == null || year == "" || month == null && month == "") {
+                    timesArray.push("");
+                    return timesArray;
+                }
+                
+                if(userType == "admin") {
+                    $.ajax({
+                        url: '../api/admin/fireCheck/getCheckTimesMarks',
+                        data: {
+                            "placeId": placeId,
+                            "checkType": checkType, 
+                            "checkYear": year, 
+                            "checkMonth": month, 
+                        },
+                        type: 'post',
+                        dataType: 'json',
+                        async: false,
+                        success: function(data) {
+                            data.forEach(function(obj) {
+                                timesArray.push(obj);
+                            });
+                        }
+                     });
+                    
+                    if(timesArray.length == 0) {
+                        timesArray.push("");
+                    }
+                    
+                } else {
+	                
+	                if(parseInt(frequence) == 31) {
+	                    day =  32 - new Date(parseInt(year), parseInt(month)-1, 32).getDate();
+	                } else {
+	                    day = frequence;
+	                }
+	                for(var i=1; i<= day; i++) {
+	                    timesArray.push(i);
+	                }
+                }
+                
+                return timesArray;
+            }
+	    
+            // 取得檢查日期
+            function getCheckDate(checkYear, checkMonth, placeId, checkType, checkTimesMark) {
+                var result;
+                if(checkType != "" && checkYear != "" && checkMonth != "" && checkTimesMark != "") {
+	                $.ajax({
+	                    url: '../api/admin/fireCheck/checkDateList',
+	                    data: {
+	                        "checkYear": checkYear, 
+	                        "checkMonth": checkMonth,
+	                        "placeId": placeId,
+	                        "checkType": checkType, 
+	                        "checkTimesMark": parseInt(checkTimesMark)
+	                    },
+	                    type: 'post',
+	                    dataType: 'json',
+	                    async: false,
+	                    success: function(data) {  
+	                        checkDateOri = data;
+	                        result = data;
+	                    } 
+	                 });
+                }
+                 return result;
+            }
+            
+            function checkDataBeforeSave() {
+                var message = "";
+                var rows = $('#jqxgrid').jqxGrid('getrows');
+                for (var i = 0; i < rows.length; i++) {
+                    var checkSymbolVal = $('#jqxgrid').jqxGrid('getcellvalue', i, "checkSymbol");
+                    var checkResultVal = $('#jqxgrid').jqxGrid('getcellvalue', i, "checkResult");
+                    var checkStatusVal = $('#jqxgrid').jqxGrid('getcellvalue', i, "checkStatus");
+                    var msg = "";
+                    if(typeof checkSymbolVal != 'undefined' && checkSymbolVal && checkSymbolVal != "O") {
+                        if(typeof checkResultVal == 'undefined' || !checkResultVal) {
+                            msg += "【檢查狀況處置情形】";
+                        } 
+                        if(typeof checkStatusVal == 'undefined' || !checkStatusVal) {
+                            if(msg != "") {
+                                msg += "、";
+                            }
+                            msg += "【狀態】";
+                        }
+                    } else {
+                        if(typeof checkResultVal != 'undefined' && checkResultVal) {
+                            if(typeof checkStatusVal == 'undefined' || !checkStatusVal) {
+                                msg += "【狀態】";
+                            }
+                        } 
+                    }
+                    if(checkResultVal == "請輸入內容...") {
+                        msg += "【檢查狀況處置情形】";
+                    }
+                    if(checkStatusVal == "請選擇...") {
+                        if(msg != "") {
+                            msg += "、";
+                        }
+                        msg += "【狀態】";
+                    }
+                    if(msg != "") {
+                        msg = "No." + (i+1) + " - " + msg + "<br/>"; 
+                    } 
+                    message += msg;
+                    
+                };
+                if(message != "") {
+                    message = "請填寫以下資料：<br/>" + message;
+                }
+                return message;
+            }
+            
+            // 抓取新的CheckRecord資料
+            function createNewRecord(checkYear, checkMonth, placeId, checkType, checkTimesMark, checkDate) {                
+                var resultData;
+                $.ajax({
+                    url: '../api/admin/fireCheck/createNewRecord',
+                    data: {
+                        "checkYear": checkYear, 
+                        "checkMonth": checkMonth,
+                        "placeId": placeId,
+                        "checkType": checkType, 
+                        "checkTimesMark": parseInt(checkTimesMark),
+                        "checkDate": checkDate
+                    },
+                    type: 'post',
+                    dataType: 'json',
+                    async: false,
+                    success: function(data) {
+                        resultData = data;
+                    },
+                    error: function(data) {  
+                        popupWin("執行發生錯誤", "請洽系統管理員!");
+                    } 
+                 });
+                
+                var gridSource2 =
+                {
+                    dataType: "json",
+                    localdata: resultData,
+                    datafields:
+                    [
+                        { name: 'checkId', type: 'string' },
+                        { name: 'deviceType', type: 'string' },
+                        { name: 'checkContent', type: 'string' },
+                        { name: 'checkSymbol', type: 'string' },
+                        { name: 'checkResult', type: 'string'},
+                        { name: 'checkStatus', type: 'string' }
+                    ],
+                    id: 'checkId',
+                    updaterow: function (rowid, rowdata, commit) {
+                        var rowindex = $("#jqxgrid").jqxGrid('getrowboundindexbyid', rowid);          
+                        editedRows.push(rowdata);
+                        commit(true);
+                    } 
+                };
+                var dataAdapter2 = new $.jqx.dataAdapter(gridSource2);
+                var cellclass = function (row, datafield, value, rowdata) {
+                    for (var i = 0; i < editedRows.length; i++) {
+                        if (editedRows[i].uid == row) {
+                            return "editedRow";
+                        }
+                    }
+                }
+                var checkSymbolSource =
+                {
+                     datatype: "array",
+                     datafields: [
+                         { name: 'label', type: 'string' }
+                     ],
+                     localdata: [
+                          {label: ""},
+                          {label: "O"},
+                          {label: "V"},
+                          {label: "X"}
+                     ]
+                };
+                var checkSymbolAdapter = new $.jqx.dataAdapter(checkSymbolSource);
+                var checkStatusSource =
+                {
+                     datatype: "array",
+                     datafields: [
+                         { name: 'label', type: 'string' }
+                     ],
+                     localdata: [
+                          {label: "請選擇..."},
+                          {label: "已送單"},
+                          {label: "處理中"},
+                          {label: "已完成"},
+                          {label: ""}
+                     ]
+                };
+                
+                var cellvaluechanging = function (row, datafield, columntype, oldvalue, newvalue) {
+                    if(datafield == "checkSymbol") {
+                        if(newvalue != "" && newvalue != "O") {
+                            $("#jqxgrid").jqxGrid('setcellvalue', row, "checkResult", "請輸入內容...");
+                            $("#jqxgrid").jqxGrid('setcellvalue', row, "checkStatus", "請選擇...");
+                        } else {
+                            $("#jqxgrid").jqxGrid('setcellvalue', row, "checkResult", "");
+                            $("#jqxgrid").jqxGrid('setcellvalue', row, "checkStatus", "");
+                        }
+                        
+                    } 
+                    if(datafield == "checkResult") {
+                        if(newvalue != "" ) {
+                            var checkStatus = $("#jqxgrid").jqxGrid('getcellvalue', row, "checkStatus");
+                            if(!checkStatus) {
+                                $("#jqxgrid").jqxGrid('setcellvalue', row, "checkStatus", "請選擇...");
+                            }
+                        } else {
+                            $("#jqxgrid").jqxGrid('setcellvalue', row, "checkStatus", "");
+                        }
+                        
+                    }
+                }
+                
+                var checkStatusAdapter = new $.jqx.dataAdapter(checkStatusSource);
+                
+                $("#jqxgrid").jqxGrid(
+                        {
+                            width: '100%',
+                            height: '90%',
+                            source: dataAdapter2,
+                            sortable: true,
+                            enabletooltips: true,
+                            editable: true,
+                            showfilterrow: true,
+                            filterable: true,
+                            columnsresize: true,
+							theme: 'energyblue',
+                            columns: [
+                                {
+                                    text: 'No.', sortable: false, filterable: false, editable: false,
+                                    groupable: false, draggable: false, resizable: false,
+                                    datafield: '', columntype: 'number', width: 40,
+                                    cellsrenderer: function (row, column, value) {
+                                        return "<div style='margin:4px;'>" + (value + 1) + "</div>";
+                                    }
+                                },
+                                { text: '類別設備內容', columntype: 'textbox', editable: false,  cellclassname: cellclass, filtertype: 'input', datafield: 'deviceType', width: 120 },
+                                { text: '檢查重點實施內容', columntype: 'textbox', editable: false,  cellclassname: cellclass, filtertype: 'input', datafield: 'checkContent' },
+                                { text: '符號', columntype: 'dropdownlist', editable: true, cellclassname: cellclass, filtertype: 'list', filteritems: symbolItem, datafield: 'checkSymbol', width: 70, cellsalign: 'center',
+                                    createeditor: function (row, value, editor) {
+                                        editor.jqxDropDownList({ source: checkSymbolAdapter, displayMember: 'label', valueMember: 'label', promptText: " ", selectedIndex: 0});
+                                    }, cellvaluechanging: cellvaluechanging
+                                },
+                                { text: '檢查狀況處置情形', columntype: 'textbox', editable: true, cellclassname: cellclass, filtertype: 'input', datafield: 'checkResult', width: 200,
+                                    initeditor: function (row, column, editor) {
+                                        editor.attr('maxlength', 200);
+                                    },
+                                    validation: function (cell, value) {
+                                        if(typeof recordPreRowIndex != 'undefined' && recordPreRowIndex) {
+                                        var data = $("#jqxgrid").jqxGrid('getrowdata', recordPreRowIndex);
+                                        if ((value == "" || value == null) && data.checkSymbol != "O"  && data.checkSymbol != "" && data.checkSymbol != null) {
+                                            return { result: false, message: "請輸入【檢查狀況處置情形】" };
+                                        }
+                                        }
+                                        return true;
+                                    }, cellvaluechanging: cellvaluechanging
+                                },
+                                { text: '狀態', columntype: 'dropdownlist', editable: true, cellclassname: cellclass, filtertype: 'list', filteritems: statusItem, datafield: 'checkStatus', width: 70,
+                                    createeditor: function (row, value, editor) {
+                                        editor.jqxDropDownList({ source: checkStatusAdapter, displayMember: 'label', valueMember: 'label', promptText: " ", selectedIndex: 0});
+                                    },
+                                    validation: function (cell, value) {
+                                        if(typeof recordPreRowIndex != 'undefined' && recordPreRowIndex) {
+                                        var data = $("#jqxgrid").jqxGrid('getrowdata', recordPreRowIndex);
+	                                        if((data.checkSymbol && data.checkSymbol != "O") || data.checkResult) {
+	                                            if (!value) {
+	                                                return { result: false, message: "請選擇【狀態】" }; 
+                                        }
+	                                        }
+                                        }
+                                        return true;
+                                    }
+                                }
+                            ]
+                        });
+                if(userType == "admin") {
+                    $("#jqxgrid").jqxGrid({ editable: false });
+
+                }
+                
+                $("#jqxgrid").on('cellbeginedit', function (event) {
+                    var args = event.args;
+                    recordPreRowIndex = args.rowindex;
+                });
+                                  
+                
+                var  localizationobj = {};
+                localizationobj.filterchoosestring= "全部";
+                $("#jqxgrid").jqxGrid('localizestrings', localizationobj);
+            }
+            
+            function queryRecordData(recordDataNew) {
+                editedRows = [];
+//                 gridSourceNew.localdata = recordDataNew;
+                var checkSymbolSource =
+                {
+                     datatype: "array",
+                     datafields: [
+                         { name: 'label', type: 'string' },
+                         { name: 'value', type: 'string' }
+                     ],
+                     localdata: [
+                          {label: "", value: ""},
+                          {label: "O", value: "O"},
+                          {label: "V", value: "V"},
+                          {label: "X", value: "X"}
+                     ]
+                };
+                var checkSymbolAdapter = new $.jqx.dataAdapter(checkSymbolSource, {
+                    autoBind: true
+                });
+                var checkStatusSource =
+                {
+                     datatype: "array",
+                     datafields: [
+                         { name: 'label', type: 'string' },
+                         { name: 'value', type: 'string' }
+                     ],
+                     localdata: [
+                        {label: "請選擇...", value: "請選擇..."},
+                        {label: "已送單", value: "已送單"},
+                        {label: "處理中", value: "處理中"},
+                        {label: "已完成", value: "已完成"},
+                        {label: "", value: ""}
+                     ]
+                };
+                var checkStatusAdapter = new $.jqx.dataAdapter(checkStatusSource, {
+                    autoBind: true
+                });
+gridSourceNew =
+                {
+                    dataType: "json",
+                    localdata: recordDataNew,
+                    datafields:
+                    [
+                        { name: 'checkId', type: 'string' },
+                        { name: 'deviceType', type: 'string' },
+                        { name: 'checkContent', type: 'string' },
+                        { name: 'checkSymbol', type: 'string', value: 'checkSymbol', values: { source: checkSymbolAdapter.records, value: 'value', name: 'label' } },
+                        { name: 'checkResult', type: 'string'},
+                        { name: 'checkStatus', type: 'string', value: 'checkStatus', values: { source: checkStatusAdapter.records, value: 'value', name: 'label' } },
+                        { name: 'updateDtYYYYMMDDHHMMSS', type: 'string' },
+                        { name: 'updateDt', type:'date' }
+                    ],
+                    id: 'checkId',
+                    updaterow: function (rowid, rowdata, commit) {
+                        var rowindex = $("#jqxgrid").jqxGrid('getrowboundindexbyid', rowid);          
+                        editedRows.push(rowdata);
+                        commit(true);
+                    } 
+                };
+
+                var dataAdapter2 = new $.jqx.dataAdapter(gridSourceNew);
+                
+                var cellclass = function (row, datafield, value, rowdata) {
+                    for (var i = 0; i < editedRows.length; i++) {
+                        if (editedRows[i].uid == row) {
+                            return "editedRow";
+                        }
+                    }
+                }
+                
+                var cellvaluechanging = function (row, datafield, columntype, oldvalue, newvalue) {
+                    if(datafield == "checkSymbol") {
+                        if(newvalue != "" && newvalue != "O") {
+                            $("#jqxgrid").jqxGrid('setcellvalue', row, "checkResult", "請輸入內容...");
+                            $("#jqxgrid").jqxGrid('setcellvalue', row, "checkStatus", "請選擇...");
+                        } else {
+                            $("#jqxgrid").jqxGrid('setcellvalue', row, "checkResult", "");
+                            $("#jqxgrid").jqxGrid('setcellvalue', row, "checkStatus", "");
+                        }
+                        
+                    } 
+                    if(datafield == "checkResult") {
+                        if(newvalue != "" ) {
+                            var checkStatus = $("#jqxgrid").jqxGrid('getcellvalue', row, "checkStatus");
+                            if(!checkStatus) {
+                                $("#jqxgrid").jqxGrid('setcellvalue', row, "checkStatus", "請選擇...");
+                            }
+                        } else {
+                            $("#jqxgrid").jqxGrid('setcellvalue', row, "checkStatus", "");
+                        }
+                        
+                    }
+                }
+                
+                $("#jqxgrid").jqxGrid({
+                            width: '100%',
+                            height: '90%',
+                            source: dataAdapter2,
+                            sortable: true,
+                            enabletooltips: true,
+                            editable: true,
+                            showfilterrow: true,
+                            filterable: true,
+                            columnsresize: true,
+                            columns: [
+                                {
+                                    text: 'No.', sortable: false, filterable: false, editable: false,
+                                    groupable: false, draggable: false, resizable: false,
+                                    datafield: '', columntype: 'number', width: 40,
+                                    cellsrenderer: function (row, column, value) {
+                                        return "<div style='margin:4px;'>" + (value + 1) + "</div>";
+                                    }
+                                },
+                                { text: '類別設備內容', columntype: 'textbox', editable: false,  cellclassname: cellclass, filtertype: 'input', datafield: 'deviceType', width: 120 },
+                                { text: '檢查重點實施內容', columntype: 'textbox', editable: false,  cellclassname: cellclass, filtertype: 'input', datafield: 'checkContent' },
+                                { text: '符號', columntype: 'dropdownlist', editable: true, cellclassname: cellclass, filtertype: 'list', filteritems: symbolItem, datafield: 'checkSymbol', width: 70, cellsalign: 'center',
+                                    createeditor: function (row, value, editor) {
+                                        editor.jqxDropDownList({ source: checkSymbolAdapter, displayMember: 'label', valueMember: 'value'});
+//                                         editor.jqxDropDownList({ source: checkSymbolAdapter, promptText: " ", selectedIndex: 0});
+                                    }, cellvaluechanging: cellvaluechanging
+                                },
+                                { text: '檢查狀況處置情形', columntype: 'textbox', editable: true, cellclassname: cellclass, filtertype: 'input', datafield: 'checkResult', width: 200,
+                                    initeditor: function (row, column, editor) {
+                                        editor.attr('maxlength', 200);
+                                    },
+                                    validation: function (cell, value) {
+                                        if(typeof recordPreRowIndex != 'undefined' && recordPreRowIndex) {
+	                                        var data = $("#jqxgrid").jqxGrid('getrowdata', recordPreRowIndex);
+	                                        if ((value == "" || value == null) && data.checkSymbol != "O"  && data.checkSymbol != "" && data.checkSymbol != null) {
+	                                            return { result: false, message: "請輸入【檢查狀況處置情形】" };
+	                                        }
+                                        }
+                                        return true;
+                                    }, cellvaluechanging: cellvaluechanging
+                                },
+                                { text: '狀態', columntype: 'dropdownlist', editable: true, cellclassname: cellclass, filtertype: 'list', filteritems: statusItem, datafield: 'checkStatus', width: 70,
+                                    createeditor: function (row, value, editor) {
+//                                         editor.jqxDropDownList({ source: checkStatusAdapter, selectedIndex: 4});
+                                        editor.jqxDropDownList({ source: checkStatusAdapter, displayMember: 'label', valueMember: 'value'});
+                                    },
+                                  validation: function (cell, value) {
+                                        if(typeof recordPreRowIndex != 'undefined' && recordPreRowIndex) {
+                                      var data = $("#jqxgrid").jqxGrid('getrowdata', recordPreRowIndex);
+                                            if((data.checkSymbol && data.checkSymbol != "O") || data.checkResult) {
+                                                if (!value) {
+                                                    return { result: false, message: "請選擇【狀態】" }; 
+                                      }
+                                            }
+                                        }
+                                      return true;
+                                  }
+                                },
+                                //{ text: '更新日期', columntype: 'textbox', editable: false,  cellclassname: cellclass, filtertype: 'input', datafield: 'updateDtYYYYMMDDHHMMSS', width: '10%' }
+                                { text: '更新日期', columntype: 'textbox', editable: false,  cellclassname: cellclass, filtertype: 'range', cellsformat: 'yyyy-M-d tt h:mm', datafield: 'updateDt', width: 200 }
+                            ]
+                        });
+                if(userType == "admin") {
+                    $("#jqxgrid").jqxGrid({ editable: false });
+
+                }
+                $("#jqxgrid").on('cellbeginedit', function (event) {
+                    var args = event.args;
+                    recordPreRowIndex = args.rowindex;
+
+                    var column = $("#jqxgrid").jqxGrid('getcolumn', event.args.datafield);
+                    var value = $("#jqxgrid").jqxGrid('getcellvalue', event.args.rowindex, column.datafield);
+                    console.log("cellbeginedit column="+column.text);
+                    console.log("cellbeginedit value="+value+"**");
+                    
+                });
+                
+                var  localizationobj = {};
+                localizationobj.filterchoosestring= "全部";
+                $("#jqxgrid").jqxGrid('localizestrings', localizationobj);
+            }
+            
+            function parseDateToString(dateString) {
+                var dateArray = dateString.split(',');
+                var year = dateArray[0];
+                var month = dateArray[1].length < 2 ? '0' + dateArray[1] : dateArray[1];
+                var day = dateArray[2].length < 2 ? '0' + dateArray[2] : dateArray[2];
+                var hour = dateArray[3].length < 2 ? '0' + dateArray[3] : dateArray[3];
+                var min = dateArray[4].length < 2 ? '0' + dateArray[4] : dateArray[4];
+                var sec = dateArray[5].length < 2 ? '0' + dateArray[5] : dateArray[5];
+                var resultDateStr = year + '-' + month + '-' + day + ' ' + hour + ':' + min + ':' + sec;
+                return resultDateStr;
+            }
+            
+            function popupWin(header, content) {
+                $("#msgHeader").empty().append("<span>" + header + "</span>");
+                $("#msg").empty().append("<span>" + content + "</span>");
+                $("#jqxwindow").jqxWindow('open');
+            }
+            
+            function getExportData1(checkYear, checkMonth, placeId, checkType, checkTimesMark, checkDate) {
+                var resultData;
+                var mangSign = "";
+                var mangName = "";
+                var checkDate1 = "";
+                var checkDate2 = "";
+                $.ajax({
+                    url: '../api/admin/fireCheck/export1',
+                    data: {
+                        "checkYear": checkYear, 
+                        "checkMonth": checkMonth,
+                        "placeId": placeId,
+                        "checkType": checkType, 
+                        "checkTimesMark": parseInt(checkTimesMark),
+                        "checkDate": checkDate
+                    },
+                    type: 'post',
+                    dataType: 'json',
+                    async: false,
+                    success: function(data) {
+                        mangSign = data.managerSign;
+                        mangName = data.manager;
+                        checkDate1 = data.checkDate1Str;
+                        checkDate2 = data.checkDate2Str;
+                        resultData = data.resultList;
+                        
+                        var chkDate = checkDate1 + "/" + checkDate2;
+                        $("#export1Title1").append("<span>" + $("#userPlace option:selected").text()+checkYear+"年"+checkMonth+"月"+checkType + "自行檢查記錄表</span>");
+                        $("#export1Title2").append("<span>單位主管簽章：" + mangSign + "</span>");
+                        $("#export1Title3").append("<span>負責人：" + mangName + "&nbsp;&nbsp;檢查日期：" + chkDate + "</span>");
+                        
+                    } 
+                });
+                var gridSource2 =
+                {
+                    dataType: "json",
+                    localdata: resultData,
+                    datafields:
+                    [
+                        { name: 'checkContent', type: 'string' },
+                        { name: 'checkSymbol1', type: 'string' },
+                        { name: 'checkResult1', type: 'string'},
+                        { name: 'checkSymbol2', type: 'string' },
+                        { name: 'checkResult2', type: 'string'},
+                        { name: 'updatorName', type: 'string' }
+                    ]
+                };
+                var dataAdapter2 = new $.jqx.dataAdapter(gridSource2);
+                   
+                
+                $("#jqxgridExport1").jqxGrid(
+                        {
+                            width: 1000,
+                            source: dataAdapter2, 
+                            autoheight: true,
+                            autorowheight: true,
+                            columnsresize: true,
+                            theme: 'energyblue',
+                            columns: [
+                                {   text: 'No.', sortable: false, filterable: false, editable: false,
+                                    groupable: false, draggable: false, resizable: false,
+                                    datafield: '', columntype: 'number', width: '5%',
+                                    cellsrenderer: function (row, column, value) {
+                                        return "<div style='margin:4px;'>" + (value + 1) + "</div>";
+                                    }
+                                },
+                                { text: '檢查重點實施內容', columntype: 'textbox', datafield: 'checkContent', width: '20%' },
+                                { text: '符號', columntype: 'textbox', datafield: 'checkSymbol1', width: '10%', cellsalign: 'center'},
+                                { text: '檢查狀況處置情形', columntype: 'textbox', datafield: 'checkResult1', width: '20%' },
+                                { text: '符號', columntype: 'textbox', datafield: 'checkSymbol2', width: '10%', cellsalign: 'center'},
+                                { text: '檢查狀況處置情形', columntype: 'textbox', datafield: 'checkResult2', width: '20%' },
+                                { text: '更新人員', columntype: 'textbox', datafield: 'updatorName', width: '15%'}
+                            ]
+
+                        });
+                    $("#jqxwindowExport1").jqxWindow('open');
+                }
+            
+            function getExportData2(checkYear, checkMonth, placeId, checkType, checkTimesMark, checkDate) {
+                var resultData;
+                var mangSign = "";
+                var mangName = "";
+                var checkDateStr = "";
+                $.ajax({
+                    url: '../api/admin/fireCheck/export2',
+                    data: {
+                        "checkYear": checkYear, 
+                        "checkMonth": checkMonth,
+                        "placeId": placeId,
+                        "checkType": checkType, 
+                        "checkTimesMark": parseInt(checkTimesMark),
+                        "checkDate": checkDate
+                    },
+                    type: 'post',
+                    dataType: 'json',
+                    async: false,
+                    success: function(data) {
+                        mangSign = data.managerSign;
+                        mangName = data.manager;
+                        checkDateStr = data.checkDateYYYYMMDD;
+                        resultData = data.resultList;
+                        
+                        $("#export1Title1").append("<span>" + $("#userPlace option:selected").text()+checkYear+"年"+checkMonth+"月"+checkType + "自行檢查記錄表</span>");
+                        $("#export1Title2").append("<span>單位主管簽章：" + mangSign + "</span>");
+                        $("#export1Title3").append("<span>負責人：" + mangName + "&nbsp;&nbsp;檢查日期：" + checkDateStr + "</span>");
+                        
+                    }
+                });
+                var gridSource2 =
+                {
+                    dataType: "json",
+                    localdata: resultData,
+                    datafields:
+                    [
+                        { name: 'deviceType', type: 'string' },
+                        { name: 'checkContent', type: 'string' },
+                        { name: 'checkSymbol', type: 'string' },
+                        { name: 'checkResult', type: 'string'},
+                        { name: 'updatorName', type: 'string' }
+                    ]
+                };
+                var dataAdapter2 = new $.jqx.dataAdapter(gridSource2);
+                
+                $("#jqxgridExport1").jqxGrid(
+                        {
+                            width: 1000,
+                            source: dataAdapter2, 
+                            autoheight: true,
+                            autorowheight: true,
+                            columnsresize: true,
+                            theme: 'energyblue',
+                            columns: [
+                                {   text: 'No.', sortable: false, filterable: false, editable: false,
+                                    groupable: false, draggable: false, resizable: false,
+                                    datafield: '', columntype: 'number', width: '5%',
+                                    cellsrenderer: function (row, column, value) {
+                                        return "<div style='margin:4px;'>" + (value + 1) + "</div>";
+                                    }
+                                },
+                                { text: '類別設備內容', columntype: 'textbox', datafield: 'deviceType', width: '12%' },
+                                { text: '檢查重點實施內容', columntype: 'textbox', datafield: 'checkContent', width: '40%' },
+                                { text: '符號', columntype: 'textbox', datafield: 'checkSymbol', width: '10%', cellsalign: 'center'},
+                                { text: '檢查狀況處置情形', columntype: 'textbox', datafield: 'checkResult', width: '20%' },
+                                { text: '更新人員', columntype: 'textbox', datafield: 'updatorName', width: '10%'}
+                            ]
+
+                });
+                $("#jqxwindowExport1").jqxWindow('open');
+            }
+            
+            function getExportData4(checkYear, checkMonth, placeId, checkType) {
+                var resultData;
+                var mangSign = "";
+                var mangName = "";
+                var checkDateStr = "";
+                $.ajax({
+                    url: '../api/admin/fireCheck/export4',
+                    data: {
+                        "checkYear": checkYear, 
+                        "checkMonth": checkMonth,
+                        "placeId": placeId,
+                        "checkType": checkType
+                    },
+                    type: 'post',
+                    dataType: 'json',
+                    async: false,
+                    success: function(data) {
+                        mangSign = data.managerSign;
+                        mangName = data.manager;
+                        resultData = data.resultList;
+                        
+                        $("#export1Title1").append("<span>" + $("#userPlace option:selected").text()+checkYear+"年"+checkMonth+"月"+checkType + "自行檢查記錄表</span>");
+                        $("#export1Title2").append("<span>單位主管簽章：" + mangSign + "</span>");
+                        $("#export1Title3").append("<span>負責人：" + mangName + "</span>");
+                    }
+                });
+                var gridSource2 =
+                {
+                    dataType: "json",
+                    localdata: resultData,
+                    datafields:
+                    [
+                        { name: 'day', type: 'string' },
+                        { name: 'dayOfWeek', type: 'string' },
+                        { name: 'checkSymbol1', type: 'string' },
+                        { name: 'checkSymbol2', type: 'string' },
+                        { name: 'checkSymbol3', type: 'string'},
+                        { name: 'checkSymbol4', type: 'string'},
+                        { name: 'checkSymbol5', type: 'string'},
+                        { name: 'checkSymbol6', type: 'string'},
+                        { name: 'updatorName', type: 'string' }
+                    ]
+                };
+                var dataAdapter2 = new $.jqx.dataAdapter(gridSource2);
+                
+                $("#jqxgridExport1").jqxGrid(
+                        {
+                            width: '100%',
+                            source: dataAdapter2, 
+                            autoheight: true,
+                            autorowheight: true,
+                            columnsresize: true,
+                            theme: 'energyblue',
+                            columns: [
+                                { text: '日期', columntype: 'textbox', datafield: 'day', width: '5%', cellsalign: 'center'},
+                                { text: '週', columntype: 'textbox', datafield: 'dayOfWeek', width: '5%', cellsalign: 'center'},
+                                { text: '用火設備使用情形', columntype: 'textbox', datafield: 'checkSymbol1', cellsalign: 'center'},
+                                { text: '電器設備配線', columntype: 'textbox', datafield: 'checkSymbol2', cellsalign: 'center'},
+                                { text: '煙蒂處理', columntype: 'textbox', datafield: 'checkSymbol3', cellsalign: 'center'},
+                                { text: '下班時火源管理', columntype: 'textbox', datafield: 'checkSymbol4', cellsalign: 'center'},
+                                { text: '其它(可燃物管理等)', columntype: 'textbox', datafield: 'checkSymbol5', cellsalign: 'center'},
+                                { text: '附記', columntype: 'textbox', datafield: 'checkSymbol6', cellsalign: 'center'},
+                                { text: '更新人員', columntype: 'textbox', datafield: 'updatorName', width: '10%'}
+                            ]
+
+                });
+                $("#jqxwindowExport1").jqxWindow('open');
+            }
+            
+            function initGridData() {
+                data = [];
+                var source =
+                {
+                        localdata: data,
+                        datatype: "array"
+                };
+                var dataAdapter = new $.jqx.dataAdapter(source);
+                $("#jqxgrid").jqxGrid(
+                {
+                    width: '100%',
+                    height: '90%',
+                    source: dataAdapter,
+                    showfilterrow: true,
+                    filterable: true,
+//                     columnsresize: true,
+                    theme: 'energyblue',
+//                     ready: function() {
+//                         $("#jqxgrid").jqxGrid('clear');
+//                     },
+                    columns: [
+                         { text: 'No.', filterable: false, width: 40}, 
+                         { text: '類別設備內容', filtertype: 'input', width: 120 },
+                         { text: '檢查重點實施內容', filtertype: 'input' },
+                         { text: '符號', filtertype: 'input', width: 70},
+                         { text: '檢查狀況處置情形', filtertype: 'input', width: 200},
+                         { text: '狀態', filtertype: 'input', width: 70},
+                         { text: '更新日期', filtertype: 'input', width: 200 }
+                     ]
+                });
+            }
+            
+            function getLinkUrl(functionItems) {
+                var url = "../admin/" + functionItems + "?userPlaceId=" + $("#userPlaceId").val();
+                window.location.href = url;
+            }
+			
+	    </script>
+	</head>
+	
+	<body class='default'>
+		<!-- HEADER -->
+		<header id="header">
+			<div id="logo-group">
+
+				<span id="logo" style="width: 0;"></span>
+            <h5 class="txt-color-white">   <b>中台禪寺</b> 消防安檢登錄系統</h5>
+
+			</div>
+
+
+			<!-- pulled right: nav area -->
+			<div class="pull-right">
+				
+				<!-- logout button -->
+				<div id="logout" class="btn-header transparent pull-right">
+				
+					<h6 class="txt-color-white">管理者 &nbsp;&nbsp;<th:block th:text="${UserName}"></th:block>&nbsp;&nbsp;<th:block th:text="${UserId}"></th:block>&nbsp;&nbsp;IP:<th:block th:text="${UserIp}"></th:block> 
+                    <span > <a class="btn btn-default btn-sm " href="logout">登出</a> </span>
+					</h6>
+
+				</div>
+				<!-- end logout button -->
+
+			</div>
+			<!-- end pulled right: nav area -->
+
+		</header>
+		<!-- END HEADER -->
+
+		<!-- Left panel : Navigation area -->
+		<!-- Note: This width of the aside area can be adjusted through LESS variables -->
+		<aside id="left-panel">
+            <nav>
+                <select id="userPlace" name="userPlace">
+                    <th:block th:each="upmi:${upmis}">
+                        <option th:text="${upmi.place}" th:value="${upmi.getPlaceId()}" th:selected="${upId==upmi.getPlaceId()}"></option>
+                    </th:block>
+                </select>
+                <input type="hidden" id="userPlaceId" name="userPlaceId" th:value="${upId}" />
+            </nav>
+            <nav th:switch="${UserType}">
+                <ul th:case="'admin'">
+                    <li>
+                        <a href="#" onclick="javascript:getLinkUrl('index')"><i class="fa fa-lg fa-fw fa-home txt-color-pink"></i> <span class="menu-item-parent">主頁面</span></a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="javascript:getLinkUrl('fireCheck')"><i class="fa fa-lg fa-fw fa-bar-chart-o txt-color-pink"></i> <span class="menu-item-parent">安檢登錄 / 調閱</span></a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="javascript:getLinkUrl('announceMsg')"><i class="fa fa-lg fa-fw fa-newspaper-o txt-color-pink"></i> <span class="menu-item-parent">公告訊息</span></a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="javascript:getLinkUrl('checkStatusMark')"><i class="fa fa-lg fa-fw fa-question txt-color-pink"></i> <span class="menu-item-parent">問題項狀態處理</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-lg fa-fw fa-print txt-color-pink"></i> <span class="menu-item-parent">檢查總表</span></a>
+                        <ul>
+                            <li>
+                                <a href="#" onclick="javascript:getLinkUrl('checkSummary')"><i class="fa fa-arrow-circle-right"></i> <span class="menu-item-parent">總表</span></a>
+                                <a href="#" onclick="javascript:getLinkUrl('checkResultFollow')"><i class="fa fa-arrow-circle-right"></i> <span class="menu-item-parent">進度追蹤</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-lg fa-fw fa-cog txt-color-pink"></i> <span class="menu-item-parent">管理設定</span></a>
+                        <ul>
+                            <li>
+                                <a href="#" onclick="javascript:getLinkUrl('userPlaceMapping')"><i class="fa fa-arrow-circle-right"></i> <span class="menu-item-parent">場所人員對應表</span></a>
+                                <a href="#" onclick="javascript:getLinkUrl('announceSet')"><i class="fa fa-arrow-circle-right"></i> <span class="menu-item-parent">公告訊息設定</span></a>
+                                <a href="#" onclick="javascript:getLinkUrl('onlineUsers')"><i class="fa fa-arrow-circle-right"></i> <span class="menu-item-parent">線上使用者查詢</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul th:case="'user'">
+                    <li>
+                        <a href="#" onclick="javascript:getLinkUrl('index')"><i class="fa fa-lg fa-fw fa-home txt-color-pink"></i> <span class="menu-item-parent">主頁面</span></a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="javascript:getLinkUrl('fireCheck')"><i class="fa fa-lg fa-fw fa-bar-chart-o txt-color-pink"></i> <span class="menu-item-parent">安檢登錄 / 調閱</span></a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="javascript:getLinkUrl('announceMsg')"><i class="fa fa-lg fa-fw fa-newspaper-o txt-color-pink"></i> <span class="menu-item-parent">公告訊息</span></a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="javascript:getLinkUrl('checkStatusMark')"><i class="fa fa-lg fa-fw fa-question txt-color-pink"></i> <span class="menu-item-parent">問題項狀態處理</span></a>
+                    </li>
+                 </ul>
+            </nav>
+            <span class="minifyme" data-action="minifyMenu"> 
+                <i class="fa fa-arrow-circle-left hit"></i> 
+            </span>
+        </aside>
+		<!-- END NAVIGATION -->
+
+		<!-- MAIN PANEL -->		
+		<div id="main" role="main">
+		    <!-- MAIN CONTENT -->
+            <div id="content" style="height: 100%;">
+                <!-- widget grid -->
+                <section id="widget-grid" style="height: 100%;">
+                    <!-- row -->
+                    <div class="row" style="height: 100%;">
+                        <!-- NEW WIDGET START -->
+                        <article style="height: 100%;">
+                            <!-- Widget ID (each widget will need unique ID)-->
+                            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false" style="height: 100%; vertical-align:middle;">
+                                <header>
+                                    <span class="fa fa-arrow-circle-right" style="margin-left: 5px; vertical-align:middle;"> 安檢登錄/調閱 </span>
+                                </header>
+                                <div>
+						            <div id="jqxToolBar" style="height: 5%; display:inline-flex; align-items:center; justify-content:flex-start;"></div>
+					            </div>
+					            <div id='jqxWidget' style="height: 95%;">
+					                <div id="jqxgrid" style="height: 100%;"></div>
+					                <div style="font-size: 12px; font-family: Verdana, Geneva, 'DejaVu Sans', sans-serif; margin-top: 30px;">
+					                    <div id="cellbegineditevent"></div>
+					                    <div style="margin-top: 10px;" id="cellendeditevent"></div>
+					                </div>
+					            </div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+            </div>
+            <br/><br/>
+		</div>
+        <div>
+            <div id='jqxwindowExport1' style="font-size: 13px; font-family: Verdana; float: left;">
+                <div id="export1WinHeader">匯出自行檢查記錄表&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="匯出" style="margin-bottom: 5px;" id="btnExport1" /></div>
+                <div id="export1Content">
+                        <div id="export1Title1" style="text-align: center"></div>
+                        <div id="export1Title2" style="float: left"></div>
+                        <div id="export1Title3" style="float: right"></div>
+                        <div id="jqxgridExport1"></div>      
+                </div>
+            </div>
+        </div>
+		<!-- END MAIN PANEL -->
+        <div id='jqxwindow' style="font-size: 16px; font-family: Verdana; float: left;">
+            <div id="msgHeader"></div>
+            <div id="msgContent" style="margin: 10px">
+                <div id="msg"></div><br/><br/>
+                <div style="float: right;">
+                    <input type="button" value="確認" style="margin-bottom: 5px;" id="btnConfirm" /><br />
+                </div>
+            </div>
+        </div>
+		
+        <!-- IMPORTANT: APP CONFIG -->
+        <script src="js/app.config.js"></script>
+
+        <!-- MAIN APP JS FILE -->
+        <script src="js/app.min.js"></script>
+
+	</body>
+</html>

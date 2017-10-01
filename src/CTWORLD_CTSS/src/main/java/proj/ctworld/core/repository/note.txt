@@ -1,0 +1,15 @@
+1.JpaRepository上就有一些Function可以用了
+如 save,find
+https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.single-repository-behaviour
+
+2.在Repository(DAO)上寫Query
+
+3.在Repository(DAO)上加入很複雜的 query
+
+不在建用
+2.在Repository(DAO)上跟著spring-data的範例訂立Query
+https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.sample-app.finders.strategies
+
+高階寫法
+1.可以把功能加到所有裹
+https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.custom-behaviour-for-all-repositories
